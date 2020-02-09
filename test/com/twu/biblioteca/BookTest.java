@@ -22,4 +22,14 @@ public class BookTest {
         Book book2 = new Book("Robinson Crusoe", "Daniel Defoe", 89);
         Book book3 = new Book("Robinson Crusoe", "Daniel Defoe", 2023);
     }
+
+    @Test
+    public void shouldCheckOutBook() {
+        //Given
+        Book book = new Book("Robinson Crusoe", "Daniel Defoe", 1871);
+        //When
+        book.checkOut();
+        //Then
+        assertTrue(book.getCheckedOut());
+    }
 }

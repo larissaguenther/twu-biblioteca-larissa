@@ -4,6 +4,7 @@ public class Book {
     private String title;
     private String author;
     private int year;
+    private boolean checkedOut;
 
     public Book(String title, String author, int year) throws IllegalArgumentException{
         if(title.isEmpty()) {
@@ -18,6 +19,7 @@ public class Book {
         this.title = title;
         this.author = author;
         this.year = year;
+        this.checkedOut = false;
     }
 
     public String getTitle() {
@@ -31,4 +33,14 @@ public class Book {
     public int getYear() {
         return year;
     }
+
+    public boolean getCheckedOut() {
+        return checkedOut;
+    }
+
+    public void checkOut() {
+        this.checkedOut = true;
+    }
+
+
 }
