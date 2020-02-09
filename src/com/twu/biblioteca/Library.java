@@ -25,10 +25,24 @@ public class Library {
 
     public void displayBookList(ArrayList<Book> bookList) {
         for(int i = 0; i < bookList.size(); i++) {
-            if (bookList.get(i).getCheckedOut() == false) {
-                outputStream.println(bookList.get(i).getTitle() + " | " + bookList.get(i).getAuthor() + " | " + bookList.get(i).getYear());
+           displayOnlyNonCheckedOutBooks(bookList.get(i));
+        }
+    }
+
+    private void displayOnlyNonCheckedOutBooks(Book book) {
+        if (book.getCheckedOut() == false) {
+            outputStream.println(book.getTitle() + " | " + book.getAuthor() + " | " + book.getYear());
+        }
+    }
+
+    public void checkOutBook(ArrayList<Book> bookList, String title) {
+        for(int i = 0; i < bookList.size(); i++) {
+            if(bookList.get(i).getTitle().equals(title)) {
+                bookList.get(i).checkOut();
+                outputStream.println("Thank you! Enjoy the book");
             }
         }
+
     }
 
     private ArrayList<Book> setUpBookList(ArrayList<Book> bookList) {
@@ -40,14 +54,5 @@ public class Library {
         bookList.add(book3);
 
         return bookList;
-    }
-
-    public void checkOutBook(ArrayList<Book> bookList, String title) {
-        for(int i = 0; i < bookList.size(); i++) {
-            if(bookList.get(i).getTitle().equals(title)) {
-                bookList.get(i).checkOut();
-            }
-        }
-
     }
 }
