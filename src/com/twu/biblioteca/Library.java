@@ -73,6 +73,7 @@ public class Library {
             if(bookList.get(i).getTitle().equals(title)) {
                 if(bookList.get(i).getCheckedOut() == true) {
                     bookList.get(i).checkIn();
+                    outputStream.println("Thank you for returning the book");
                 } else {
 
                 }

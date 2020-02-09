@@ -165,4 +165,24 @@ public class LibraryTest {
         //Then
         assertFalse(bookList.get(0).getCheckedOut());
     }
+
+    @Test
+    public void shouldNotifyUserWhenBookIsSucessfullyReturned() {
+        //Given
+        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream bookListStream = new PrintStream(outputStream);
+        Library library = new Library(bookListStream);
+        ArrayList<Book> bookList = new ArrayList<Book>();
+        Book book1 = new Book("Moby Dick", "Herman Melville", 1851);
+        Book book2 = new Book("Robinson Crusoe", "Daniel Defoe", 1871);
+        Book book3 = new Book("Pride and Prejudice", "Jane Austen", 1813);
+        bookList.add(book1);
+        bookList.add(book2);
+        bookList.add(book3);
+        library.checkOutBook(bookList, "Moby Dick");
+        //When
+        library.returnBook(bookList, "Moby Dick");
+        //Then
+        assertEquals("Thank you! Enjoy the book\nThank you for returning the book\n", outputStream.toString());
+    }
 }
