@@ -2,6 +2,7 @@ package com.twu.biblioteca;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class CommandLineInterface {
     private PrintStream outputStream;
@@ -15,31 +16,16 @@ public class CommandLineInterface {
     }
 
     public void displayMenu() {
-        outputStream.println("List of Books");
+        outputStream.println("1 List of Books");
     }
 
-    public void displayBookList() {
-        ArrayList<Book> bookList = new ArrayList<Book>();
-        setUpBookList(bookList);
-        printBookList(bookList);
+    public String getInput() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 
-    private ArrayList<Book> setUpBookList(ArrayList<Book> bookList) {
-        Book book1 = new Book("Moby Dick", "Herman Melville", 1851);
-        Book book2 = new Book("Robinson Crusoe", "Daniel Defoe", 1871);
-        Book book3 = new Book("Pride and Prejudice", "Jane Austen", 1813);
-        bookList.add(book1);
-        bookList.add(book2);
-        bookList.add(book3);
-
-        return bookList;
+    public void processInput() {
+        CommandLineController commandLineController = new CommandLineController(outputStream);
+        commandLineController.chooseMenuOption(getInput());
     }
-
-    private void printBookList(ArrayList<Book> bookList) {
-        for(int i = 0; i < bookList.size(); i++) {
-            outputStream.println(bookList.get(i).getTitle() + " | " + bookList.get(i).getAuthor() + " | " + bookList.get(i).getYear());
-        }
-    }
-
-
 }

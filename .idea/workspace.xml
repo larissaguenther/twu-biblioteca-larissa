@@ -2,6 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="add9df22-86b6-4d56-8a79-3cc5e88d93b4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/biblioteca/com/twu/biblioteca/BibliotecaApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/biblioteca/com/twu/biblioteca/BibliotecaApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/biblioteca/com/twu/biblioteca/CommandLineInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/biblioteca/com/twu/biblioteca/CommandLineInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/biblioteca/com/twu/biblioteca/CommandLineInterfaceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/biblioteca/com/twu/biblioteca/CommandLineInterfaceTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/BibliotecaApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/BibliotecaApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/CommandLineInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/CommandLineInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/com/twu/biblioteca/CommandLineInterfaceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/com/twu/biblioteca/CommandLineInterfaceTest.java" afterDir="false" />
     </list>
@@ -47,7 +52,7 @@
       <recent name="com.twu.biblioteca" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.CommandLineInterfaceTest">
+  <component name="RunManager" selected="Application.BibliotecaApp">
     <configuration name="BibliotecaApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.BibliotecaApp" />
       <module name="biblioteca" />
@@ -61,7 +66,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BookTest.shouldThrowExceptionWhenYearHasWrongFormat" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CommandLineControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="biblioteca" />
       <extension name="coverage">
         <pattern>
@@ -70,8 +75,23 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.twu.biblioteca" />
-      <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.BookTest" />
-      <option name="METHOD_NAME" value="shouldThrowExceptionWhenYearHasWrongFormat" />
+      <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.CommandLineControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CommandLineControllerTest.shouldDisplayListOfBooksWhen1IsEntered" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="biblioteca" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.twu.biblioteca.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.twu.biblioteca" />
+      <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.CommandLineControllerTest" />
+      <option name="METHOD_NAME" value="shouldDisplayListOfBooksWhen1IsEntered" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -92,7 +112,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CommandLineInterfaceTest.shouldDisplayListOfBooks" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CommandLineInterfaceTest.shouldDisplayListOfBooksWhen1IsEntered" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="biblioteca" />
       <extension name="coverage">
         <pattern>
@@ -102,23 +122,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.twu.biblioteca" />
       <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.CommandLineInterfaceTest" />
-      <option name="METHOD_NAME" value="shouldDisplayListOfBooks" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CommandLineInterfaceTest.shouldDisplayMenu" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="biblioteca" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.twu.biblioteca.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.twu.biblioteca" />
-      <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.CommandLineInterfaceTest" />
-      <option name="METHOD_NAME" value="shouldDisplayMenu" />
+      <option name="METHOD_NAME" value="shouldDisplayListOfBooksWhen1IsEntered" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -126,11 +130,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CommandLineInterfaceTest" />
         <item itemvalue="Application.BibliotecaApp" />
-        <item itemvalue="JUnit.CommandLineInterfaceTest.shouldDisplayMenu" />
-        <item itemvalue="JUnit.CommandLineInterfaceTest.shouldDisplayListOfBooks" />
-        <item itemvalue="JUnit.BookTest.shouldThrowExceptionWhenYearHasWrongFormat" />
+        <item itemvalue="JUnit.CommandLineInterfaceTest" />
+        <item itemvalue="JUnit.CommandLineInterfaceTest.shouldDisplayListOfBooksWhen1IsEntered" />
+        <item itemvalue="JUnit.CommandLineControllerTest" />
+        <item itemvalue="JUnit.CommandLineControllerTest.shouldDisplayListOfBooksWhen1IsEntered" />
       </list>
     </recent_temporary>
   </component>
@@ -148,30 +152,30 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="100" y="100" width="1480" height="850" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1581239623017">
+    <state x="100" y="100" width="1480" height="850" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1581242063885">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="100" y="100" width="1480" height="850" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1581239623017" />
+    <state x="100" y="100" width="1480" height="850" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1581242063885" />
     <state x="689" y="432" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1581235130939">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="689" y="432" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1581235130939" />
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1581239686397">
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1581242177226">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1581239686397" />
-    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1581239686395">
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1581242177226" />
+    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1581242177223">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1581239686395" />
-    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1581239686394">
+    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1581242177223" />
+    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1581242177223">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1581239686394" />
-    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1581239686396">
+    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1581242177223" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1581242177224">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1581239686396" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1581242177224" />
     <state width="1638" height="363" key="GridCell.Tab.1.bottom" timestamp="1581238107715">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -188,9 +192,9 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1638" height="363" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1581238107714" />
-    <state x="598" y="259" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1581237841419">
+    <state x="598" y="259" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1581241757792">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="598" y="259" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1581237841419" />
+    <state x="598" y="259" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1581241757792" />
   </component>
 </project>

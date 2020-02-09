@@ -14,7 +14,7 @@ public class BibliotecaApp {
 
         CommandLineInterface commandLineInterface = new CommandLineInterface(outputStream);
         commandLineInterface.displayWelcomeMessage();
-        commandLineInterface.displayBookList();
         commandLineInterface.displayMenu();
+        commandLineInterface.processInput();
     }
 }
