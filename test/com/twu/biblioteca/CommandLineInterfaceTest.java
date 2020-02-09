@@ -51,21 +51,4 @@ public class CommandLineInterfaceTest {
         assertEquals(expectedInput, actualInput);
     }
 
-    @Test
-    public void shouldDisplayListOfBooksWhen1IsEntered() {
-        //Given
-        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        PrintStream bookListStream = new PrintStream(outputStream);
-        CommandLineInterface commandLineInterface = new CommandLineInterface(bookListStream);
-        String expectedInput = "1";
-        InputStream inputStream = new ByteArrayInputStream(expectedInput.getBytes());
-        System.setIn(inputStream);
-        //When
-        commandLineInterface.processInput();
-        //Then
-        assertEquals("Moby Dick | Herman Melville | 1851\nRobinson Crusoe | Daniel Defoe | 1871\nPride and Prejudice | Jane Austen | 1813\n", outputStream.toString());
-    }
-
-
-
 }

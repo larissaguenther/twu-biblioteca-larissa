@@ -22,6 +22,19 @@ public class CommandLineControllerTest {
     }
 
     @Test
+    public void shouldNotifyUserWhenInvalidMenuOptionIsEntered() {
+        //Given
+        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream errorStream = new PrintStream(outputStream);
+        CommandLineController commandLineController = new CommandLineController(errorStream);
+        //When
+        commandLineController.chooseMenuOption("invalid");
+        //Then
+        assertEquals("Please select a valid option\n", outputStream.toString());
+
+    }
+
+    @Test
     public void shouldDisplayListOfBooks() {
         //Given
         final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

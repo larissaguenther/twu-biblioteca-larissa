@@ -1,7 +1,6 @@
 package com.twu.biblioteca;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CommandLineInterface {
@@ -26,6 +25,8 @@ public class CommandLineInterface {
 
     public void processInput() {
         CommandLineController commandLineController = new CommandLineController(outputStream);
-        commandLineController.chooseMenuOption(getInput());
+        while(!getInput().equals("quit")) {
+            commandLineController.chooseMenuOption(getInput());
+        }
     }
 }
