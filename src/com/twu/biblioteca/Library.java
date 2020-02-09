@@ -38,8 +38,14 @@ public class Library {
     public void checkOutBook(ArrayList<Book> bookList, String title) {
         for(int i = 0; i < bookList.size(); i++) {
             if(bookList.get(i).getTitle().equals(title)) {
-                bookList.get(i).checkOut();
-                outputStream.println("Thank you! Enjoy the book");
+                if(bookList.get(i).getCheckedOut() == false) {
+                    bookList.get(i).checkOut();
+                    outputStream.println("Thank you! Enjoy the book");
+                } else {
+                    outputStream.println("Sorry that book is not available");
+                }
+            } else {
+                //outputStream.println("Sorry that book is not available");
             }
         }
 
