@@ -21,9 +21,9 @@ public class CommandLineInterface {
     }
 
     private ArrayList<Book> setUpBookList(ArrayList<Book> bookList) {
-        Book book1 = new Book("Moby Dick");
-        Book book2 = new Book("Robinson Crusoe");
-        Book book3 = new Book("Pride and Prejudice");
+        Book book1 = new Book("Moby Dick", "Herman Melville", 1851);
+        Book book2 = new Book("Robinson Crusoe", "Daniel Defoe", 1871);
+        Book book3 = new Book("Pride and Prejudice", "Jane Austen", 1813);
         bookList.add(book1);
         bookList.add(book2);
         bookList.add(book3);
@@ -33,7 +33,7 @@ public class CommandLineInterface {
 
     private void printBookList(ArrayList<Book> bookList) {
         for(int i = 0; i < bookList.size(); i++) {
-            outputStream.println(bookList.get(i).getTitle());
+            outputStream.println(bookList.get(i).getTitle() + " | " + bookList.get(i).getAuthor() + " | " + bookList.get(i).getYear());
         }
     }
 }

@@ -30,7 +30,7 @@ public class CommandLineInterfaceTest {
         //When
         commandLineInterface.displayBookList();
         //Then
-        assertEquals("Moby Dick\nRobinson Crusoe\nPride and Prejudice\n", outputStream.toString());
+        assertEquals("Moby Dick | Herman Melville | 1851\nRobinson Crusoe | Daniel Defoe | 1871\nPride and Prejudice | Jane Austen | 1813\n", outputStream.toString());
     }
 
 }
