@@ -32,4 +32,5 @@ public class CommandLineInterfaceTest {
         //Then
         assertEquals("Moby Dick\nRobinson Crusoe\nPride and Prejudice\n", outputStream.toString());
     }
+
 }

@@ -16,6 +16,11 @@ public class CommandLineInterface {
 
     public void displayBookList() {
         ArrayList<Book> bookList = new ArrayList<Book>();
+        setUpBookList(bookList);
+        printBookList(bookList);
+    }
+
+    private ArrayList<Book> setUpBookList(ArrayList<Book> bookList) {
         Book book1 = new Book("Moby Dick");
         Book book2 = new Book("Robinson Crusoe");
         Book book3 = new Book("Pride and Prejudice");
@@ -23,6 +28,10 @@ public class CommandLineInterface {
         bookList.add(book2);
         bookList.add(book3);
 
+        return bookList;
+    }
+
+    private void printBookList(ArrayList<Book> bookList) {
         for(int i = 0; i < bookList.size(); i++) {
             outputStream.println(bookList.get(i).getTitle());
         }
