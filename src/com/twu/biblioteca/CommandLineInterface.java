@@ -14,6 +14,10 @@ public class CommandLineInterface {
         outputStream.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!");
     }
 
+    public void displayMenu() {
+        outputStream.println("List of Books");
+    }
+
     public void displayBookList() {
         ArrayList<Book> bookList = new ArrayList<Book>();
         setUpBookList(bookList);
@@ -36,4 +40,6 @@ public class CommandLineInterface {
             outputStream.println(bookList.get(i).getTitle() + " | " + bookList.get(i).getAuthor() + " | " + bookList.get(i).getYear());
         }
     }
+
+
 }

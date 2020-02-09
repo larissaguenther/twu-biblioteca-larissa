@@ -22,6 +22,18 @@ public class CommandLineInterfaceTest {
     }
 
     @Test
+    public void shouldDisplayMenu() {
+        //Given
+        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream menuStream = new PrintStream(outputStream);
+        CommandLineInterface commandLineInterface = new CommandLineInterface(menuStream);
+        //When
+        commandLineInterface.displayMenu();
+        //Then
+        assertEquals("List of Books\n", outputStream.toString());
+    }
+
+    @Test
     public void shouldDisplayListOfBooks() {
         //Given
         final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
