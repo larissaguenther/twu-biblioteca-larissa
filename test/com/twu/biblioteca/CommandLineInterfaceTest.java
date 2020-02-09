@@ -20,4 +20,16 @@ public class CommandLineInterfaceTest {
         //Then
         assertEquals("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!\n", outputStream.toString());
     }
+
+    @Test
+    public void shouldDisplayListOfBooks() {
+        //Given
+        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream bookListStream = new PrintStream(outputStream);
+        CommandLineInterface commandLineInterface = new CommandLineInterface(bookListStream);
+        //When
+        commandLineInterface.displayBookList();
+        //Then
+        assertEquals("Moby Dick\nRobinson Crusoe\nPride and Prejudice\n", outputStream.toString());
+    }
 }
