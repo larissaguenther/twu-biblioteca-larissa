@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="add9df22-86b6-4d56-8a79-3cc5e88d93b4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/biblioteca/com/twu/biblioteca/CommandLineController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/biblioteca/com/twu/biblioteca/CommandLineController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/CommandLineController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/CommandLineController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/Library.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/Library.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/com/twu/biblioteca/BookTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/com/twu/biblioteca/BookTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/com/twu/biblioteca/LibraryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/com/twu/biblioteca/LibraryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,6 +40,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -48,7 +53,7 @@
       <recent name="com.twu.biblioteca" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.LibraryTest.shouldNotifyUserWhenSelectedBookIsNotAvailable">
+  <component name="RunManager" selected="Application.BibliotecaApp">
     <configuration name="BibliotecaApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.BibliotecaApp" />
       <module name="biblioteca" />
@@ -62,7 +67,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LibraryTest.shouldNotDisplayCheckedOutBooksInListOfBooks" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BookTest.shouldReturnBook" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="biblioteca" />
       <extension name="coverage">
         <pattern>
@@ -71,14 +76,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.twu.biblioteca" />
-      <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.LibraryTest" />
-      <option name="METHOD_NAME" value="shouldNotDisplayCheckedOutBooksInListOfBooks" />
+      <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.BookTest" />
+      <option name="METHOD_NAME" value="shouldReturnBook" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LibraryTest.shouldNotifyUserWhenBookIsSuccessfullyCheckedOut" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LibraryTest.shouldGetTitleFromInput" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="biblioteca" />
       <extension name="coverage">
         <pattern>
@@ -88,13 +93,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.twu.biblioteca" />
       <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.LibraryTest" />
-      <option name="METHOD_NAME" value="shouldNotifyUserWhenBookIsSuccessfullyCheckedOut" />
+      <option name="METHOD_NAME" value="shouldGetTitleFromInput" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LibraryTest.shouldNotifyUserWhenSelectedBookIsAlreadyCheckedOut" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LibraryTest.shouldReturnBookWhenTitleIsEntered" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="biblioteca" />
       <extension name="coverage">
         <pattern>
@@ -104,13 +109,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.twu.biblioteca" />
       <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.LibraryTest" />
-      <option name="METHOD_NAME" value="shouldNotifyUserWhenSelectedBookIsAlreadyCheckedOut" />
+      <option name="METHOD_NAME" value="shouldReturnBookWhenTitleIsEntered" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LibraryTest.shouldNotifyUserWhenSelectedBookIsNotAvailable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LibraryTest.shouldThrowExceptionWhenInputIsNotValid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="biblioteca" />
       <extension name="coverage">
         <pattern>
@@ -120,7 +125,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.twu.biblioteca" />
       <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.LibraryTest" />
-      <option name="METHOD_NAME" value="shouldNotifyUserWhenSelectedBookIsNotAvailable" />
+      <option name="METHOD_NAME" value="shouldThrowExceptionWhenInputIsNotValid" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -128,11 +133,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.LibraryTest.shouldNotifyUserWhenSelectedBookIsNotAvailable" />
         <item itemvalue="Application.BibliotecaApp" />
-        <item itemvalue="JUnit.LibraryTest.shouldNotifyUserWhenSelectedBookIsAlreadyCheckedOut" />
-        <item itemvalue="JUnit.LibraryTest.shouldNotifyUserWhenBookIsSuccessfullyCheckedOut" />
-        <item itemvalue="JUnit.LibraryTest.shouldNotDisplayCheckedOutBooksInListOfBooks" />
+        <item itemvalue="JUnit.LibraryTest.shouldGetTitleFromInput" />
+        <item itemvalue="JUnit.LibraryTest.shouldThrowExceptionWhenInputIsNotValid" />
+        <item itemvalue="JUnit.LibraryTest.shouldReturnBookWhenTitleIsEntered" />
+        <item itemvalue="JUnit.BookTest.shouldReturnBook" />
       </list>
     </recent_temporary>
   </component>
@@ -167,22 +172,22 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="336" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1581265495435" />
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1581269312636">
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1581271806881">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1581269312636" />
-    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1581269312635">
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1581271806881" />
+    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1581271806879">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1581269312635" />
-    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1581269312634">
+    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1581271806879" />
+    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1581271806879">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1581269312634" />
-    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1581269312635">
+    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1581271806879" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1581271806880">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1581269312635" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1581271806880" />
     <state width="1638" height="363" key="GridCell.Tab.1.bottom" timestamp="1581238107715">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -199,6 +204,10 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1638" height="363" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1581238107714" />
+    <state x="341" y="164" key="SettingsEditor" timestamp="1581269975189">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="341" y="164" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1581269975189" />
     <state x="598" y="259" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1581266332139">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

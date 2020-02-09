@@ -15,7 +15,7 @@ public class CommandLineController {
     public void chooseMenuOption(String input) {
         if (input.equals("1")) {
             library.displayBookList(library.getBookList());
-            library.checkOutBook(library.getBookList(), library.getInput());
+            library.processInput(library.getBookList(), library.getInput());
         } else {
             outputStream.println("Please select a valid option");
         }

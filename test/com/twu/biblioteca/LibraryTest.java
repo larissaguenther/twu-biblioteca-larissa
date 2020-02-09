@@ -29,6 +29,35 @@ public class LibraryTest {
         assertEquals("Moby Dick | Herman Melville | 1851\nRobinson Crusoe | Daniel Defoe | 1871\nPride and Prejudice | Jane Austen | 1813\n", outputStream.toString());
     }
 
+    @Test (expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionWhenInputIsNotValid() {
+        //Given
+        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream bookListStream = new PrintStream(outputStream);
+        Library library = new Library(bookListStream);
+        ArrayList<Book> bookList = new ArrayList<Book>();
+        Book book1 = new Book("Moby Dick", "Herman Melville", 1851);
+        Book book2 = new Book("Robinson Crusoe", "Daniel Defoe", 1871);
+        Book book3 = new Book("Pride and Prejudice", "Jane Austen", 1813);
+        bookList.add(book1);
+        bookList.add(book2);
+        bookList.add(book3);
+        //When
+        library.processInput(bookList, "test");
+    }
+
+    @Test
+    public void shouldGetTitleFromInput() {
+        //Given
+        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream bookListStream = new PrintStream(outputStream);
+        Library library = new Library(bookListStream);
+        //When
+        String expected = library.getTitleFromInput("checkout:Moby Dick");
+        //Then
+        assertEquals("Moby Dick", expected);
+    }
+
     @Test
     public void shouldCheckOutBookWhenTitleIsEntered() {
         //Given
@@ -119,5 +148,21 @@ public class LibraryTest {
         library.checkOutBook(bookList, "Moby Dick");
         //Then
         assertEquals("Thank you! Enjoy the book\nSorry that book is not available\n", outputStream.toString());
+    }
+
+    @Test
+    public void shouldReturnBookWhenTitleIsEntered() {
+        //Given
+        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream bookListStream = new PrintStream(outputStream);
+        Library library = new Library(bookListStream);
+        ArrayList<Book> bookList = new ArrayList<Book>();
+        Book book = new Book("Moby Dick", "Herman Melville", 1851);
+        bookList.add(book);
+        library.checkOutBook(bookList, "Moby Dick");
+        //When
+        library.returnBook(bookList,"Moby Dick");
+        //Then
+        assertFalse(bookList.get(0).getCheckedOut());
     }
 }

@@ -35,6 +35,24 @@ public class Library {
         }
     }
 
+    public void processInput(ArrayList<Book> bookList, String input) throws IllegalArgumentException {
+        if(input.startsWith("checkout")) {
+            checkOutBook(bookList, getTitleFromInput(input));
+        } else if(input.startsWith("return")) {
+            returnBook(bookList, getTitleFromInput(input));
+        } else if (input.equals("quit")){
+            System.exit(0);
+        } else {
+            throw new IllegalArgumentException("This is not a valid command");
+        }
+    }
+
+    public String getTitleFromInput(String input) {
+        String[] inputArray = input.split(":");
+        String title = inputArray[1];
+        return title;
+    }
+
     public void checkOutBook(ArrayList<Book> bookList, String title) {
         for(int i = 0; i < bookList.size(); i++) {
             if(bookList.get(i).getTitle().equals(title)) {
@@ -48,7 +66,20 @@ public class Library {
                 //outputStream.println("Sorry that book is not available");
             }
         }
+    }
 
+    public void returnBook(ArrayList<Book> bookList, String title) {
+        for(int i = 0; i < bookList.size(); i++) {
+            if(bookList.get(i).getTitle().equals(title)) {
+                if(bookList.get(i).getCheckedOut() == true) {
+                    bookList.get(i).checkIn();
+                } else {
+
+                }
+            } else {
+
+            }
+        }
     }
 
     private ArrayList<Book> setUpBookList(ArrayList<Book> bookList) {

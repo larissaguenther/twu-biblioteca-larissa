@@ -32,4 +32,15 @@ public class BookTest {
         //Then
         assertTrue(book.getCheckedOut());
     }
+
+    @Test
+    public void shouldReturnBook() {
+        //Given
+        Book book = new Book("Robinson Crusoe", "Daniel Defoe", 1871);
+        book.checkOut();
+        //When
+        book.checkIn();
+        //Then
+        assertFalse(book.getCheckedOut());
+    }
 }

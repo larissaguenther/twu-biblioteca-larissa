@@ -42,5 +42,9 @@ public class Book {
         this.checkedOut = true;
     }
 
+    public void checkIn() {
+        this.checkedOut = false;
+    }
+
 
 }
