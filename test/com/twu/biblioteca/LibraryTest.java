@@ -13,6 +13,7 @@ public class LibraryTest {
     private ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     private PrintStream stream = new PrintStream(outputStream);
     private ArrayList<Book> bookList = new ArrayList<Book>();
+    private ArrayList<Movie> movieList = new ArrayList<Movie>();
 
     @Test
     public void shouldNotifyUserWhenInvalidMenuOptionIsChosen() {
@@ -40,11 +41,35 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldNotifyUserWhenInputIsNotValid() {
+    public void shouldDisplayListOfMovies() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        library.displayMovieList(setUpTestMovieList(movieList));
+        //Then
+        assertEquals("List of Movies\n" +
+                "Pulp Fiction\n" +
+                "Kill Bill\n" +
+                "Inglorious Basterds\n", outputStream.toString());
+    }
+
+    @Test
+    public void shouldNotifyUserWhenInvalidBookListOptionIsChosen() {
         //Given
         Library library = new Library(stream);
         //When
         library.processBookListInput(setUpTestBookList(bookList), "test");
+        //Then
+        assertEquals("Please select a valid option\n", outputStream.toString());
+    }
+
+    @Test
+    public void shouldNotifyUserWhenInvalidMovieListOptionIsChosen() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        library.processMovieListInput(setUpTestMovieList(movieList), "test");
+        //Then
         assertEquals("Please select a valid option\n", outputStream.toString());
     }
 
@@ -173,5 +198,15 @@ public class LibraryTest {
             }
         }
         return bookList;
+    }
+
+    private ArrayList<Movie> setUpTestMovieList(ArrayList<Movie> movieList) {
+        Movie movie1 = new Movie("Pulp Fiction");
+        Movie movie2 = new Movie("Kill Bill");
+        Movie movie3 = new Movie("Inglorious Basterds");
+        movieList.add(movie1);
+        movieList.add(movie2);
+        movieList.add(movie3);
+        return movieList;
     }
 }

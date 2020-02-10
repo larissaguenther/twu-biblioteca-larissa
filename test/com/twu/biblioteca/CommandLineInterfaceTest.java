@@ -34,7 +34,8 @@ public class CommandLineInterfaceTest {
         //Then
         assertEquals("Menu\n" +
                 "#To choose a menu option use the respective number of the menu option\n" +
-                "1 List of Books\n", outputStream.toString());
+                "1 List of Books\n" +
+                "2 List of Movies\n", outputStream.toString());
     }
 
     @Test

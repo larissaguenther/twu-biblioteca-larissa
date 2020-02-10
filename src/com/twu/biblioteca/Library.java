@@ -7,12 +7,15 @@ import java.util.Scanner;
 public class Library {
     private PrintStream outputStream;
     private ArrayList<Book> bookList;
+    private ArrayList<Movie> movieList;
     private CommandLineInterface commandLineInterface;
 
     public Library(PrintStream outputStream) {
         this.outputStream = outputStream;
         this.bookList = new ArrayList<Book>();
+        this.movieList = new ArrayList<Movie>();
         setUpBookList(bookList);
+        setUpMovieList(movieList);
         this.commandLineInterface = new CommandLineInterface(outputStream);
     }
 
@@ -23,6 +26,8 @@ public class Library {
     public void chooseMenuOption(String input) {
         if (input.equals("1")) {
             chooseBookListOption();
+        } else if (input.equals("2")) {
+            chooseMovieListOption();
         } else if (input.equals("quit")) {
             chooseQuitOption();
         } else {
@@ -34,6 +39,13 @@ public class Library {
         displayBookList(bookList);
         while (true) {
             processBookListInput(bookList, commandLineInterface.getInput());
+        }
+    }
+
+    private void chooseMovieListOption() {
+        displayMovieList(movieList);
+        while(true) {
+            processMovieListInput(movieList, commandLineInterface.getInput());
         }
     }
 
@@ -51,6 +63,13 @@ public class Library {
         commandLineInterface.printOutput("#To return to menu use menu");
         for(int i = 0; i < bookList.size(); i++) {
             displayOnlyNonCheckedOutBooks(bookList.get(i));
+        }
+    }
+
+    public void displayMovieList(ArrayList<Movie> movieList) {
+        commandLineInterface.printOutput("List of Movies");
+        for(int i = 0; i < movieList.size(); i++) {
+            commandLineInterface.printOutput(movieList.get(i).getTitle());
         }
     }
 
@@ -72,6 +91,17 @@ public class Library {
             chooseMenuOption(commandLineInterface.getInput());
         }
         else {
+            commandLineInterface.printOutput("Please select a valid option");
+        }
+    }
+
+    public void processMovieListInput(ArrayList<Movie> movieList, String input) {
+        if(input.equals("quit")) {
+            System.exit(0);
+        } else if(input.equals("menu")) {
+            commandLineInterface.displayMenu();
+            chooseMenuOption(commandLineInterface.getInput());
+        } else {
             commandLineInterface.printOutput("Please select a valid option");
         }
     }
@@ -135,5 +165,16 @@ public class Library {
         bookList.add(book3);
 
         return bookList;
+    }
+
+    private ArrayList<Movie> setUpMovieList(ArrayList<Movie> movieList) {
+        Movie movie1 = new Movie("Pulp Fiction");
+        Movie movie2 = new Movie("Kill Bill");
+        Movie movie3 = new Movie("Inglorious Basterds");
+        movieList.add(movie1);
+        movieList.add(movie2);
+        movieList.add(movie3);
+
+        return movieList;
     }
 }
