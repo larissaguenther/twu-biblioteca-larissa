@@ -48,9 +48,9 @@ public class LibraryTest {
         library.displayMovieList(setUpTestMovieList(movieList));
         //Then
         assertEquals("List of Movies\n" +
-                "Pulp Fiction\n" +
-                "Kill Bill\n" +
-                "Inglorious Basterds\n", outputStream.toString());
+                "Pulp Fiction | 1993 | Quentin Tarantino | 8\n" +
+                "Kill Bill | 2001 | Quentin Tarantino | 9\n" +
+                "Inglorious Basterds | 2010 | Quentin Tarantino | 10\n", outputStream.toString());
     }
 
     @Test
@@ -201,9 +201,9 @@ public class LibraryTest {
     }
 
     private ArrayList<Movie> setUpTestMovieList(ArrayList<Movie> movieList) {
-        Movie movie1 = new Movie("Pulp Fiction");
-        Movie movie2 = new Movie("Kill Bill");
-        Movie movie3 = new Movie("Inglorious Basterds");
+        Movie movie1 = new Movie("Pulp Fiction", 1993, "Quentin Tarantino", "8");
+        Movie movie2 = new Movie("Kill Bill", 2001, "Quentin Tarantino", "9");
+        Movie movie3 = new Movie("Inglorious Basterds", 2010, "Quentin Tarantino", "10");
         movieList.add(movie1);
         movieList.add(movie2);
         movieList.add(movie3);

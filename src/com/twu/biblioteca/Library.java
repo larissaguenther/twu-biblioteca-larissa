@@ -69,7 +69,10 @@ public class Library {
     public void displayMovieList(ArrayList<Movie> movieList) {
         commandLineInterface.printOutput("List of Movies");
         for(int i = 0; i < movieList.size(); i++) {
-            commandLineInterface.printOutput(movieList.get(i).getTitle());
+            commandLineInterface.printOutput(movieList.get(i).getTitle() +
+                    " | " + movieList.get(i).getYear() +
+                    " | " + movieList.get(i).getDirector() +
+                    " | " + movieList.get(i).getRating());
         }
     }
 
@@ -168,9 +171,9 @@ public class Library {
     }
 
     private ArrayList<Movie> setUpMovieList(ArrayList<Movie> movieList) {
-        Movie movie1 = new Movie("Pulp Fiction");
-        Movie movie2 = new Movie("Kill Bill");
-        Movie movie3 = new Movie("Inglorious Basterds");
+        Movie movie1 = new Movie("Pulp Fiction", 1993, "Quentin Tarantino", "8");
+        Movie movie2 = new Movie("Kill Bill", 2001, "Quentin Tarantino", "9");
+        Movie movie3 = new Movie("Inglorious Basterds", 2010, "Quentin Tarantino", "10");
         movieList.add(movie1);
         movieList.add(movie2);
         movieList.add(movie3);
