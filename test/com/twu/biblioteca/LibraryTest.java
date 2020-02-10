@@ -15,6 +15,16 @@ public class LibraryTest {
     private ArrayList<Book> bookList = new ArrayList<Book>();
 
     @Test
+    public void shouldNotifyUserWhenInvalidMenuOptionIsChosen() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        library.chooseMenuOption("invalid");
+        //Then
+        assertEquals("Please select a valid option\n", outputStream.toString());
+    }
+
+    @Test
     public void shouldDisplayListOfBooks() {
         //Given
         Library library = new Library(stream);
@@ -23,17 +33,19 @@ public class LibraryTest {
         //Then
         assertEquals("List of Books\n" +
                 "#To check-out a book use checkout:<booktitle>. To return a book use return:<booktitle>.\n" +
+                "#To return to menu use menu\n" +
                 "Moby Dick | Herman Melville | 1851\n" +
                 "Robinson Crusoe | Daniel Defoe | 1871\n" +
                 "Pride and Prejudice | Jane Austen | 1813\n", outputStream.toString());
     }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void shouldThrowExceptionWhenInputIsNotValid() {
+    @Test
+    public void shouldNotifyUserWhenInputIsNotValid() {
         //Given
         Library library = new Library(stream);
         //When
         library.processBookListInput(setUpTestBookList(bookList), "test");
+        assertEquals("Please select a valid option\n", outputStream.toString());
     }
 
     @Test
@@ -66,6 +78,7 @@ public class LibraryTest {
         //Then
         assertEquals("List of Books\n" +
                 "#To check-out a book use checkout:<booktitle>. To return a book use return:<booktitle>.\n" +
+                "#To return to menu use menu\n" +
                 "Robinson Crusoe | Daniel Defoe | 1871\n" +
                 "Pride and Prejudice | Jane Austen | 1813\n", outputStream.toString());
     }
@@ -112,7 +125,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void shouldNotifyUserWhenBookIsSucessfullyReturned() {
+    public void shouldNotifyUserWhenBookIsSuccessfullyReturned() {
         //Given
         Library library = new Library(stream);
         checkOutBook(setUpTestBookList(bookList), "Moby Dick");

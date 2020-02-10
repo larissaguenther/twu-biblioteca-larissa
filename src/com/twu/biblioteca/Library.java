@@ -20,9 +20,35 @@ public class Library {
         return bookList;
     }
 
+    public void chooseMenuOption(String input) {
+        if (input.equals("1")) {
+            chooseBookListOption();
+        } else if (input.equals("quit")) {
+            chooseQuitOption();
+        } else {
+            chooseInvalidOption();
+        }
+    }
+
+    private void chooseBookListOption() {
+        displayBookList(bookList);
+        while (true) {
+            processBookListInput(bookList, commandLineInterface.getInput());
+        }
+    }
+
+    private void chooseQuitOption() {
+        System.exit(0);
+    }
+
+    private void chooseInvalidOption() {
+        commandLineInterface.printOutput("Please select a valid option");
+    }
+
     public void displayBookList(ArrayList<Book> bookList) {
         commandLineInterface.printOutput("List of Books");
         commandLineInterface.printOutput("#To check-out a book use checkout:<booktitle>. To return a book use return:<booktitle>.");
+        commandLineInterface.printOutput("#To return to menu use menu");
         for(int i = 0; i < bookList.size(); i++) {
             displayOnlyNonCheckedOutBooks(bookList.get(i));
         }
@@ -34,15 +60,19 @@ public class Library {
         }
     }
 
-    public void processBookListInput(ArrayList<Book> bookList, String input) throws IllegalArgumentException {
+    public void processBookListInput(ArrayList<Book> bookList, String input) {
         if(input.startsWith("checkout")) {
             checkOutBook(bookList, convertInput(input));
         } else if(input.startsWith("return")) {
             returnBook(bookList, convertInput(input));
         } else if (input.equals("quit")){
             System.exit(0);
-        } else {
-            throw new IllegalArgumentException("This is not a valid command");
+        } else if(input.equals("menu")) {
+            commandLineInterface.displayMenu();
+            chooseMenuOption(commandLineInterface.getInput());
+        }
+        else {
+            commandLineInterface.printOutput("Please select a valid option");
         }
     }
 

@@ -11,27 +11,4 @@ import static org.junit.Assert.*;
 
 public class CommandLineControllerTest {
 
-    private ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    private PrintStream stream = new PrintStream(outputStream);
-
-    @Test
-    public void shouldNotifyUserWhenInvalidMenuOptionIsChosen() {
-        //Given
-        CommandLineController commandLineController = new CommandLineController(stream);
-        //When
-        commandLineController.chooseMenuOption("invalid");
-        //Then
-        assertEquals("Please select a valid option\n", outputStream.toString());
-    }
-
-    @Test
-    public void shouldExitApplicationWhenQuitIsEntered() {
-        //Given
-        CommandLineController commandLineController = new CommandLineController(stream);
-        //When
-        commandLineController.chooseMenuOption("quit");
-        //Then
-        //???
-    }
-
 }
