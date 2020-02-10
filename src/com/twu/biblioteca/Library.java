@@ -7,25 +7,24 @@ import java.util.Scanner;
 public class Library {
     private PrintStream outputStream;
     private ArrayList<Book> bookList;
+    private CommandLineInterface commandLineInterface;
 
     public Library(PrintStream outputStream) {
         this.outputStream = outputStream;
         this.bookList = new ArrayList<Book>();
         setUpBookList(bookList);
+        this.commandLineInterface = new CommandLineInterface(outputStream);
     }
 
     public ArrayList<Book> getBookList() {
         return bookList;
     }
 
-    public String getInput() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
-
     public void displayBookList(ArrayList<Book> bookList) {
+        outputStream.println("List of Books");
+        outputStream.println("#To check-out a book use checkout:<booktitle>. To return a book use return:<booktitle>.");
         for(int i = 0; i < bookList.size(); i++) {
-           displayOnlyNonCheckedOutBooks(bookList.get(i));
+            displayOnlyNonCheckedOutBooks(bookList.get(i));
         }
     }
 
@@ -35,11 +34,11 @@ public class Library {
         }
     }
 
-    public void processInput(ArrayList<Book> bookList, String input) throws IllegalArgumentException {
+    public void processBookListInput(ArrayList<Book> bookList, String input) throws IllegalArgumentException {
         if(input.startsWith("checkout")) {
-            checkOutBook(bookList, getTitleFromInput(input));
+            checkOutBook(bookList, convertInput(input));
         } else if(input.startsWith("return")) {
-            returnBook(bookList, getTitleFromInput(input));
+            returnBook(bookList, convertInput(input));
         } else if (input.equals("quit")){
             System.exit(0);
         } else {
@@ -47,39 +46,47 @@ public class Library {
         }
     }
 
-    public String getTitleFromInput(String input) {
+    public String convertInput(String input) {
         String[] inputArray = input.split(":");
         String title = inputArray[1];
         return title;
     }
 
     public void checkOutBook(ArrayList<Book> bookList, String title) {
+        boolean foundBook = false;
         for(int i = 0; i < bookList.size(); i++) {
-            if(bookList.get(i).getTitle().equals(title)) {
-                if(bookList.get(i).getCheckedOut() == false) {
+            if (bookList.get(i).getTitle().equals(title)) {
+                if (bookList.get(i).getCheckedOut() == false) {
                     bookList.get(i).checkOut();
                     outputStream.println("Thank you! Enjoy the book");
+                    foundBook = true;
                 } else {
                     outputStream.println("Sorry that book is not available");
+                    foundBook = true;
                 }
-            } else {
-                //outputStream.println("Sorry that book is not available");
             }
+        }
+        if(foundBook == false) {
+                outputStream.println("Sorry that book is not available");
         }
     }
 
     public void returnBook(ArrayList<Book> bookList, String title) {
+        boolean foundBook = false;
         for(int i = 0; i < bookList.size(); i++) {
             if(bookList.get(i).getTitle().equals(title)) {
                 if(bookList.get(i).getCheckedOut() == true) {
                     bookList.get(i).checkIn();
                     outputStream.println("Thank you for returning the book");
+                    foundBook = true;
                 } else {
-
+                    outputStream.println("That book is already checked-in");
+                    foundBook = true;
                 }
-            } else {
-
             }
+        }
+        if(foundBook == false) {
+            outputStream.println("That is not a valid book to return");
         }
     }
 

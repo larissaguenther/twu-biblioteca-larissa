@@ -15,6 +15,8 @@ public class CommandLineInterface {
     }
 
     public void displayMenu() {
+        outputStream.println("Menu");
+        outputStream.println("#To choose a menu option use the respective number of the menu option");
         outputStream.println("1 List of Books");
     }
 
@@ -25,8 +27,9 @@ public class CommandLineInterface {
 
     public void processInput() {
         CommandLineController commandLineController = new CommandLineController(outputStream);
-        while(!getInput().equals("quit")) {
-            commandLineController.chooseMenuOption(getInput());
+        while(true) {
+            commandLineController.processMenuInput(getInput());
         }
+
     }
 }

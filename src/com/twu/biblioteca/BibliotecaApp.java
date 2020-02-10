@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
@@ -11,10 +10,7 @@ public class BibliotecaApp {
 
         PrintStream outputStream =  new PrintStream(new FileOutputStream(FileDescriptor.out));
 
-
-        CommandLineInterface commandLineInterface = new CommandLineInterface(outputStream);
-        commandLineInterface.displayWelcomeMessage();
-        commandLineInterface.displayMenu();
-        commandLineInterface.processInput();
+        CommandLineController commandLineController = new CommandLineController(outputStream);
+        commandLineController.startApplication();
     }
 }
