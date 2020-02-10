@@ -28,14 +28,26 @@ public class CommandLineController {
 
     public void chooseMenuOption(String input) {
         if (input.equals("1")) {
-            library.displayBookList(library.getBookList());
-            while (true) {
-                library.processBookListInput(library.getBookList(), commandLineInterface.getInput());
-            }
+            chooseBookListOption();
         } else if (input.equals("quit")) {
-            System.exit(0);
+            chooseQuitOption();
         } else {
-            commandLineInterface.printOutput("Please select a valid option");
+            chooseInvalidOption();
         }
+    }
+
+    private void chooseBookListOption() {
+        library.displayBookList(library.getBookList());
+        while (true) {
+            library.processBookListInput(library.getBookList(), commandLineInterface.getInput());
+        }
+    }
+
+    private void chooseQuitOption() {
+        System.exit(0);
+    }
+
+    private void chooseInvalidOption() {
+        commandLineInterface.printOutput("Please select a valid option");
     }
 }

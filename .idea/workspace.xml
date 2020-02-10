@@ -4,13 +4,9 @@
     <list default="true" id="add9df22-86b6-4d56-8a79-3cc5e88d93b4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/biblioteca/com/twu/biblioteca/CommandLineController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/biblioteca/com/twu/biblioteca/CommandLineController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/biblioteca/com/twu/biblioteca/CommandLineInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/biblioteca/com/twu/biblioteca/CommandLineInterface.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/test/biblioteca/com/twu/biblioteca/CommandLineControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/biblioteca/com/twu/biblioteca/CommandLineControllerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/biblioteca/com/twu/biblioteca/CommandLineInterfaceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/biblioteca/com/twu/biblioteca/CommandLineInterfaceTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/CommandLineController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/CommandLineController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/twu/biblioteca/CommandLineInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/twu/biblioteca/CommandLineInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/com/twu/biblioteca/CommandLineControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/com/twu/biblioteca/CommandLineControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/com/twu/biblioteca/CommandLineInterfaceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/com/twu/biblioteca/CommandLineInterfaceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +51,7 @@
       <recent name="com.twu.biblioteca" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.CommandLineInterfaceTest">
+  <component name="RunManager" selected="JUnit.CommandLineControllerTest.shouldNotifyUserWhenInvalidMenuOptionIsChoosen">
     <configuration name="BibliotecaApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.BibliotecaApp" />
       <module name="biblioteca" />
@@ -65,6 +61,22 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CommandLineControllerTest.shouldNotifyUserWhenInvalidMenuOptionIsChoosen" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="biblioteca" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.twu.biblioteca.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.twu.biblioteca" />
+      <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.CommandLineControllerTest" />
+      <option name="METHOD_NAME" value="shouldNotifyUserWhenInvalidMenuOptionIsChoosen" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -115,29 +127,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LibraryTest.shouldNotifyUserWhenReturnedBookIsNotCheckedOut" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="biblioteca" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.twu.biblioteca.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.twu.biblioteca" />
-      <option name="MAIN_CLASS_NAME" value="com.twu.biblioteca.LibraryTest" />
-      <option name="METHOD_NAME" value="shouldNotifyUserWhenReturnedBookIsNotCheckedOut" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CommandLineInterfaceTest" />
+        <item itemvalue="JUnit.CommandLineControllerTest.shouldNotifyUserWhenInvalidMenuOptionIsChoosen" />
         <item itemvalue="Application.BibliotecaApp" />
+        <item itemvalue="JUnit.CommandLineInterfaceTest" />
         <item itemvalue="JUnit.CommandLineInterfaceTest.shouldPrintOutput" />
         <item itemvalue="JUnit.LibraryTest" />
-        <item itemvalue="JUnit.LibraryTest.shouldNotifyUserWhenReturnedBookIsNotCheckedOut" />
       </list>
     </recent_temporary>
   </component>
@@ -172,38 +168,38 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="336" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1581265495435" />
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1581340814178">
+    <state width="1638" height="363" key="GridCell.Tab.0.bottom" timestamp="1581341824160">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1581340814178" />
-    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1581340814177">
+    <state width="1638" height="363" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1581341824160" />
+    <state width="1638" height="363" key="GridCell.Tab.0.center" timestamp="1581341824159">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1581340814177" />
-    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1581340814176">
+    <state width="1638" height="363" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1581341824159" />
+    <state width="1638" height="363" key="GridCell.Tab.0.left" timestamp="1581341824133">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1581340814176" />
-    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1581340814178">
+    <state width="1638" height="363" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1581341824133" />
+    <state width="1638" height="363" key="GridCell.Tab.0.right" timestamp="1581341824160">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1581340814178" />
-    <state width="1638" height="363" key="GridCell.Tab.1.bottom" timestamp="1581238107715">
+    <state width="1638" height="363" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1581341824160" />
+    <state width="1638" height="363" key="GridCell.Tab.1.bottom" timestamp="1581341823899">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1581238107715" />
-    <state width="1638" height="363" key="GridCell.Tab.1.center" timestamp="1581238107714">
+    <state width="1638" height="363" key="GridCell.Tab.1.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1581341823899" />
+    <state width="1638" height="363" key="GridCell.Tab.1.center" timestamp="1581341823899">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1581238107714" />
-    <state width="1638" height="363" key="GridCell.Tab.1.left" timestamp="1581238107713">
+    <state width="1638" height="363" key="GridCell.Tab.1.center/0.0.1680.1050@0.0.1680.1050" timestamp="1581341823899" />
+    <state width="1638" height="363" key="GridCell.Tab.1.left" timestamp="1581341823898">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1581238107713" />
-    <state width="1638" height="363" key="GridCell.Tab.1.right" timestamp="1581238107714">
+    <state width="1638" height="363" key="GridCell.Tab.1.left/0.0.1680.1050@0.0.1680.1050" timestamp="1581341823898" />
+    <state width="1638" height="363" key="GridCell.Tab.1.right" timestamp="1581341823899">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="363" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1581238107714" />
+    <state width="1638" height="363" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1581341823899" />
     <state x="341" y="164" key="SettingsEditor" timestamp="1581269975189">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

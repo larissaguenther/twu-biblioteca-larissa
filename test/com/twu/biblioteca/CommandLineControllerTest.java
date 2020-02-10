@@ -14,12 +14,12 @@ public class CommandLineControllerTest {
     private ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     private PrintStream stream = new PrintStream(outputStream);
 
-    /*@Test
-    public void shouldNotifyUserWhenInvalidMenuOptionIsEntered() {
+    @Test
+    public void shouldNotifyUserWhenInvalidMenuOptionIsChosen() {
         //Given
         CommandLineController commandLineController = new CommandLineController(stream);
         //When
-        commandLineController.routeInput("invalid");
+        commandLineController.chooseMenuOption("invalid");
         //Then
         assertEquals("Please select a valid option\n", outputStream.toString());
     }
@@ -29,9 +29,9 @@ public class CommandLineControllerTest {
         //Given
         CommandLineController commandLineController = new CommandLineController(stream);
         //When
-        commandLineController.routeInput("quit");
+        commandLineController.chooseMenuOption("quit");
         //Then
         //???
-    }*/
+    }
 
 }
