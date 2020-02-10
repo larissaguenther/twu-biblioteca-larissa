@@ -12,12 +12,13 @@ import static org.junit.Assert.*;
 
 public class CommandLineInterfaceTest {
 
+    private ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    private PrintStream stream = new PrintStream(outputStream);
+
     @Test
     public void shouldDisplayWelcomeMessage() {
         //Given
-        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        PrintStream welcomeStream = new PrintStream(outputStream);
-        CommandLineInterface commandLineInterface = new CommandLineInterface(welcomeStream);
+        CommandLineInterface commandLineInterface = new CommandLineInterface(stream);
         //When
         commandLineInterface.displayWelcomeMessage();
         //Then
@@ -27,9 +28,7 @@ public class CommandLineInterfaceTest {
     @Test
     public void shouldDisplayMenu() {
         //Given
-        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        PrintStream menuStream = new PrintStream(outputStream);
-        CommandLineInterface commandLineInterface = new CommandLineInterface(menuStream);
+        CommandLineInterface commandLineInterface = new CommandLineInterface(stream);
         //When
         commandLineInterface.displayMenu();
         //Then
@@ -41,9 +40,7 @@ public class CommandLineInterfaceTest {
     @Test
     public void shouldGetInput() {
         //Given
-        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        PrintStream menuStream = new PrintStream(outputStream);
-        CommandLineInterface commandLineInterface = new CommandLineInterface(menuStream);
+        CommandLineInterface commandLineInterface = new CommandLineInterface(stream);
         String expectedInput = "List of Books";
         InputStream inputStream = new ByteArrayInputStream(expectedInput.getBytes());
         System.setIn(inputStream);
@@ -53,4 +50,13 @@ public class CommandLineInterfaceTest {
         assertEquals(expectedInput, actualInput);
     }
 
+    @Test
+    public void shouldPrintOutput() {
+        //Given
+        CommandLineInterface commandLineInterface = new CommandLineInterface(stream);
+        //When
+        commandLineInterface.printOutput("Test");
+        //Then
+        assertEquals("Test\n", outputStream.toString());
+    }
 }

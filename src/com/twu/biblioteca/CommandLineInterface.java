@@ -25,11 +25,7 @@ public class CommandLineInterface {
         return scanner.nextLine();
     }
 
-    public void processInput() {
-        CommandLineController commandLineController = new CommandLineController(outputStream);
-        while(true) {
-            commandLineController.processMenuInput(getInput());
-        }
-
+    public void printOutput(String output) {
+        outputStream.println(output);
     }
 }

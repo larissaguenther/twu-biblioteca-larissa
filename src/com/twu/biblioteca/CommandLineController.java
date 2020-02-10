@@ -17,16 +17,12 @@ public class CommandLineController {
     public void startApplication() {
         commandLineInterface.displayWelcomeMessage();
         commandLineInterface.displayMenu();
-        commandLineInterface.processInput();
+        routeInput();
     }
 
-    public void processMenuInput(String input) {
-        if(input.equals("1")) {
-            chooseMenuOption(input);
-        } else if(input.equals("quit")) {
-            System.exit(0);
-        } else {
-            showInvalidMenuOptionNotification();
+    public void routeInput() {
+        while(true) {
+            chooseMenuOption(commandLineInterface.getInput());
         }
     }
 
@@ -36,12 +32,10 @@ public class CommandLineController {
             while (true) {
                 library.processBookListInput(library.getBookList(), commandLineInterface.getInput());
             }
+        } else if (input.equals("quit")) {
+            System.exit(0);
         } else {
-
+            commandLineInterface.printOutput("Please select a valid option");
         }
-    }
-
-    public void showInvalidMenuOptionNotification() {
-        outputStream.println("Please select a valid option");
     }
 }
