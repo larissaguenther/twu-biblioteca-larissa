@@ -21,8 +21,8 @@ public class Library {
     }
 
     public void displayBookList(ArrayList<Book> bookList) {
-        outputStream.println("List of Books");
-        outputStream.println("#To check-out a book use checkout:<booktitle>. To return a book use return:<booktitle>.");
+        commandLineInterface.printOutput("List of Books");
+        commandLineInterface.printOutput("#To check-out a book use checkout:<booktitle>. To return a book use return:<booktitle>.");
         for(int i = 0; i < bookList.size(); i++) {
             displayOnlyNonCheckedOutBooks(bookList.get(i));
         }
@@ -30,7 +30,7 @@ public class Library {
 
     private void displayOnlyNonCheckedOutBooks(Book book) {
         if (book.getCheckedOut() == false) {
-            outputStream.println(book.getTitle() + " | " + book.getAuthor() + " | " + book.getYear());
+            commandLineInterface.printOutput(book.getTitle() + " | " + book.getAuthor() + " | " + book.getYear());
         }
     }
 
@@ -56,14 +56,8 @@ public class Library {
         boolean foundBook = false;
         for(int i = 0; i < bookList.size(); i++) {
             if (bookList.get(i).getTitle().equals(title)) {
-                if (bookList.get(i).getCheckedOut() == false) {
-                    bookList.get(i).checkOut();
-                    outputStream.println("Thank you! Enjoy the book");
-                    foundBook = true;
-                } else {
-                    outputStream.println("Sorry that book is not available");
-                    foundBook = true;
-                }
+                checkOutBookHelper(bookList.get(i));
+                foundBook = true;
             }
         }
         if(foundBook == false) {
@@ -71,22 +65,34 @@ public class Library {
         }
     }
 
+    private void checkOutBookHelper(Book book) {
+        if (book.getCheckedOut() == false) {
+            book.checkOut();
+            commandLineInterface.printOutput("Thank you! Enjoy the book");
+        } else {
+            commandLineInterface.printOutput("Sorry that book is not available");
+        }
+    }
+
     public void returnBook(ArrayList<Book> bookList, String title) {
         boolean foundBook = false;
         for(int i = 0; i < bookList.size(); i++) {
             if(bookList.get(i).getTitle().equals(title)) {
-                if(bookList.get(i).getCheckedOut() == true) {
-                    bookList.get(i).checkIn();
-                    outputStream.println("Thank you for returning the book");
-                    foundBook = true;
-                } else {
-                    outputStream.println("That book is already checked-in");
-                    foundBook = true;
-                }
+                returnBookHelper(bookList.get(i));
+                foundBook = true;
             }
         }
         if(foundBook == false) {
             outputStream.println("That is not a valid book to return");
+        }
+    }
+
+    private void returnBookHelper(Book book) {
+        if(book.getCheckedOut() == true) {
+            book.checkIn();
+            commandLineInterface.printOutput("Thank you for returning the book");
+        } else {
+            outputStream.println("That book is already checked-in");
         }
     }
 
