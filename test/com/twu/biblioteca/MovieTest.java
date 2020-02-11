@@ -28,4 +28,14 @@ public class MovieTest {
         Movie movie = new Movie("Pulp Fiction", 1993, "Quentin Tarantino", "");
     }
 
+    @Test
+    public void shouldCheckOutMovie() {
+        //Given
+        Movie movie = new Movie("Pulp Fiction", 1993, "Quentin Tarantino", "8");
+        //When
+        movie.checkOut();
+        //Then
+        assertTrue(movie.getCheckedOut());
+    }
+
 }

@@ -68,17 +68,27 @@ public class Library {
 
     public void displayMovieList(ArrayList<Movie> movieList) {
         commandLineInterface.printOutput("List of Movies");
+        commandLineInterface.printOutput("#To check-out a movie use checkout:<movietitle>");
+        commandLineInterface.printOutput("#To return to menu use menu");
         for(int i = 0; i < movieList.size(); i++) {
-            commandLineInterface.printOutput(movieList.get(i).getTitle() +
-                    " | " + movieList.get(i).getYear() +
-                    " | " + movieList.get(i).getDirector() +
-                    " | " + movieList.get(i).getRating());
+            displayOnlyNonCheckedOutMovies(movieList.get(i));
         }
     }
 
     private void displayOnlyNonCheckedOutBooks(Book book) {
         if (book.getCheckedOut() == false) {
-            commandLineInterface.printOutput(book.getTitle() + " | " + book.getAuthor() + " | " + book.getYear());
+            commandLineInterface.printOutput(book.getTitle() +
+                    " | " + book.getAuthor() +
+                    " | " + book.getYear());
+        }
+    }
+
+    private void displayOnlyNonCheckedOutMovies(Movie movie) {
+        if (movie.getCheckedOut() == false) {
+            commandLineInterface.printOutput(movie.getTitle() +
+                    " | " + movie.getYear() +
+                    " | " + movie.getDirector() +
+                    " | " + movie.getRating());
         }
     }
 
@@ -99,7 +109,9 @@ public class Library {
     }
 
     public void processMovieListInput(ArrayList<Movie> movieList, String input) {
-        if(input.equals("quit")) {
+        if(input.startsWith("checkout")) {
+            checkOutMovie(movieList, convertInput(input));
+        } else if(input.equals("quit")) {
             System.exit(0);
         } else if(input.equals("menu")) {
             commandLineInterface.displayMenu();
@@ -134,6 +146,17 @@ public class Library {
             commandLineInterface.printOutput("Thank you! Enjoy the book");
         } else {
             commandLineInterface.printOutput("Sorry that book is not available");
+        }
+    }
+
+    public void checkOutMovie(ArrayList<Movie> movieList, String title) {
+        boolean foundMovie = false;
+        for(int i = 0; i < movieList.size(); i++) {
+            if(movieList.get(i).getTitle().equals(title)) {
+                movieList.get(i).checkOut();
+                commandLineInterface.printOutput("Thank you! Enjoy the movie");
+                foundMovie = true;
+            }
         }
     }
 

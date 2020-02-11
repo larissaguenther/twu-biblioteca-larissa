@@ -48,6 +48,8 @@ public class LibraryTest {
         library.displayMovieList(setUpTestMovieList(movieList));
         //Then
         assertEquals("List of Movies\n" +
+                "#To check-out a movie use checkout:<movietitle>\n" +
+                "#To return to menu use menu\n" +
                 "Pulp Fiction | 1993 | Quentin Tarantino | 8\n" +
                 "Kill Bill | 2001 | Quentin Tarantino | 9\n" +
                 "Inglorious Basterds | 2010 | Quentin Tarantino | 10\n", outputStream.toString());
@@ -94,6 +96,16 @@ public class LibraryTest {
     }
 
     @Test
+    public void shouldCheckOutMovieWhenTitleIsEntered() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        library.checkOutMovie(setUpTestMovieList(movieList), "Pulp Fiction");
+        //Then
+        assertTrue(movieList.get(0).getCheckedOut());
+    }
+
+    @Test
     public void shouldNotDisplayCheckedOutBooksInListOfBooks() {
         //Given
         Library library = new Library(stream);
@@ -106,6 +118,22 @@ public class LibraryTest {
                 "#To return to menu use menu\n" +
                 "Robinson Crusoe | Daniel Defoe | 1871\n" +
                 "Pride and Prejudice | Jane Austen | 1813\n", outputStream.toString());
+    }
+
+    @Test
+    public void shouldNotDisplayCheckedOutMoviesInListOfMovies() {
+        //Given
+        Library library = new Library(stream);
+        checkOutMovie(setUpTestMovieList(movieList), "Pulp Fiction");
+        //When
+        library.displayMovieList(movieList);
+        //Then
+        assertEquals("List of Movies\n" +
+                "#To check-out a movie use checkout:<movietitle>\n" +
+                "#To return to menu use menu\n" +
+                "Kill Bill | 2001 | Quentin Tarantino | 9\n" +
+                "Inglorious Basterds | 2010 | Quentin Tarantino | 10\n", outputStream.toString());
+
     }
 
     @Test
@@ -207,6 +235,16 @@ public class LibraryTest {
         movieList.add(movie1);
         movieList.add(movie2);
         movieList.add(movie3);
+        return movieList;
+    }
+
+    private ArrayList<Movie> checkOutMovie(ArrayList<Movie> movieList, String title) {
+        Library library = new Library(stream);
+        for(int i = 0; i < movieList.size(); i++) {
+            if(movieList.get(i).getTitle().equals(title)) {
+                movieList.get(i).checkOut();
+            }
+        }
         return movieList;
     }
 }

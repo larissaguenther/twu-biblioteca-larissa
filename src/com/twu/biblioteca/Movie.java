@@ -5,6 +5,7 @@ public class Movie {
     private int year;
     private String director;
     private String rating;
+    private boolean checkedOut;
 
     public Movie(String title, int year, String director, String rating) throws IllegalArgumentException {
         if(title.isEmpty()) {
@@ -23,6 +24,7 @@ public class Movie {
         this.year = year;
         this.director = director;
         this.rating = rating;
+        this.checkedOut = false;
     }
 
     public String getTitle() {
@@ -39,5 +41,13 @@ public class Movie {
 
     public String getRating() {
         return rating;
+    }
+
+    public boolean getCheckedOut() {
+        return checkedOut;
+    }
+
+    public void checkOut() {
+        checkedOut = true;
     }
 }
