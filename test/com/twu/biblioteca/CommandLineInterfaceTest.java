@@ -32,8 +32,7 @@ public class CommandLineInterfaceTest {
         //When
         commandLineInterface.displayMenu();
         //Then
-        assertEquals("Menu\n" +
-                "#To choose a menu option use the respective number of the menu option\n" +
+        assertEquals("#To choose a menu option use the respective number of the menu option\n" +
                 "1 List of Books\n" +
                 "2 List of Movies\n", outputStream.toString());
     }

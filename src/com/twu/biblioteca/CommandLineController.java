@@ -16,10 +16,6 @@ public class CommandLineController {
     public void startApplication() {
         commandLineInterface.displayWelcomeMessage();
         commandLineInterface.displayMenu();
-        routeInput();
-    }
-
-    public void routeInput() {
         while(true) {
             library.chooseMenuOption(commandLineInterface.getInput());
         }

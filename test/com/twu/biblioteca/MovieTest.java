@@ -33,7 +33,7 @@ public class MovieTest {
         //Given
         Movie movie = new Movie("Pulp Fiction", 1993, "Quentin Tarantino", "8");
         //When
-        movie.checkOut();
+        movie.checkOut("111-222");
         //Then
         assertTrue(movie.getCheckedOut());
     }

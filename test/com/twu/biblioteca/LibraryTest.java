@@ -12,8 +12,48 @@ public class LibraryTest {
 
     private ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     private PrintStream stream = new PrintStream(outputStream);
-    private ArrayList<Book> bookList = new ArrayList<Book>();
-    private ArrayList<Movie> movieList = new ArrayList<Movie>();
+    private ArrayList<LibraryItem> bookList = new ArrayList<LibraryItem>();
+    private ArrayList<LibraryItem> movieList = new ArrayList<LibraryItem>();
+
+    //---- test chooseMenuOption ----
+    /*
+    @Test
+    public void shouldDisplayListOfBooksWhenMenuOption1IsChosen() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        library.chooseMenuOption("1");
+        //Then
+        assertEquals("#To check-out an item use 'checkout:<title>. To return an item use 'return:<title>'\n" +
+                "Moby Dick\n" +
+                "Robinson Crusoe\n" +
+                "Pride and Prejudice\n" ,outputStream.toString());
+    }*/
+
+    /*
+    @Test
+    public void shouldDisplayListOfMoviesWhenMenuOption2IsChosen() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        library.chooseMenuOption("2");
+        //Then
+        assertEquals("#To check-out an item use 'checkout:<title>. To return an item use 'return:<title>'\n" +
+                "Pulp Fiction\n" +
+                "Kill Bill\n" +
+                "Inglorious Basterds\n" ,outputStream.toString());
+    }*/
+
+    /*
+    @Test
+    public void shouldExitApplicationWhenMenuOptionQuitIsChosen() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        library.chooseMenuOption("quit");
+        //Then
+
+    }*/
 
     @Test
     public void shouldNotifyUserWhenInvalidMenuOptionIsChosen() {
@@ -24,20 +64,20 @@ public class LibraryTest {
         //Then
         assertEquals("Please select a valid option\n", outputStream.toString());
     }
+    //---- test chooseMenuOption ----
 
+    //---- test displayList ----
     @Test
     public void shouldDisplayListOfBooks() {
         //Given
         Library library = new Library(stream);
         //When
-        library.displayBookList(setUpTestBookList(bookList));
+        library.displayList(setUpTestBookList(bookList));
         //Then
-        assertEquals("List of Books\n" +
-                "#To check-out a book use checkout:<booktitle>. To return a book use return:<booktitle>.\n" +
-                "#To return to menu use menu\n" +
-                "Moby Dick | Herman Melville | 1851\n" +
-                "Robinson Crusoe | Daniel Defoe | 1871\n" +
-                "Pride and Prejudice | Jane Austen | 1813\n", outputStream.toString());
+        assertEquals("#To check-out an item use 'checkout:<title>'. To return an item use 'return:<title>'\n" +
+                "Moby Dick\n" +
+                "Robinson Crusoe\n" +
+                "Pride and Prejudice\n", outputStream.toString());
     }
 
     @Test
@@ -45,202 +85,179 @@ public class LibraryTest {
         //Given
         Library library = new Library(stream);
         //When
-        library.displayMovieList(setUpTestMovieList(movieList));
+        library.displayList(setUpTestMovieList(movieList));
         //Then
-        assertEquals("List of Movies\n" +
-                "#To check-out a movie use checkout:<movietitle>\n" +
-                "#To return to menu use menu\n" +
-                "Pulp Fiction | 1993 | Quentin Tarantino | 8\n" +
-                "Kill Bill | 2001 | Quentin Tarantino | 9\n" +
-                "Inglorious Basterds | 2010 | Quentin Tarantino | 10\n", outputStream.toString());
+        assertEquals("#To check-out an item use 'checkout:<title>'. To return an item use 'return:<title>'\n" +
+                "Pulp Fiction\n" +
+                "Kill Bill\n" +
+                "Inglorious Basterds\n", outputStream.toString());
     }
 
     @Test
-    public void shouldNotifyUserWhenInvalidBookListOptionIsChosen() {
+    public void shouldOnlyDisplayNonCheckedOutItems() {
         //Given
         Library library = new Library(stream);
+        checkOutBook(setUpTestBookList(bookList), "Moby Dick");
         //When
-        library.processBookListInput(setUpTestBookList(bookList), "test");
+        library.displayList(bookList);
         //Then
-        assertEquals("Please select a valid option\n", outputStream.toString());
+        assertEquals("#To check-out an item use 'checkout:<title>'. To return an item use 'return:<title>'\n" +
+                "Robinson Crusoe\n" +
+                "Pride and Prejudice\n", outputStream.toString());
     }
+    //---- test displayList ----
 
+    //---- test processListInput ----
+    /*
     @Test
-    public void shouldNotifyUserWhenInvalidMovieListOptionIsChosen() {
+    public void shouldCheckOutItemWhenCheckOutListOptionIsChosen() {
         //Given
         Library library = new Library(stream);
+        movieList = setUpTestMovieList(movieList);
         //When
-        library.processMovieListInput(setUpTestMovieList(movieList), "test");
-        //Then
-        assertEquals("Please select a valid option\n", outputStream.toString());
-    }
-
-    @Test
-    public void shouldConvertInputToTitle() {
-        //Given
-        Library library = new Library(stream);
-        //When
-        String expected = library.convertInput("checkout:Moby Dick");
-        //Then
-        assertEquals("Moby Dick", expected);
-    }
-
-    @Test
-    public void shouldCheckOutBookWhenTitleIsEntered() {
-        //Given
-        Library library = new Library(stream);
-        //When
-        library.checkOutBook(setUpTestBookList(bookList),"Moby Dick");
-        //Then
-        assertTrue(bookList.get(0).getCheckedOut());
-    }
-
-    @Test
-    public void shouldCheckOutMovieWhenTitleIsEntered() {
-        //Given
-        Library library = new Library(stream);
-        //When
-        library.checkOutMovie(setUpTestMovieList(movieList), "Pulp Fiction");
+        library.processListInput(movieList, "checkout:Pulp Fiction");
         //Then
         assertTrue(movieList.get(0).getCheckedOut());
-    }
+    }*/
 
     @Test
-    public void shouldNotDisplayCheckedOutBooksInListOfBooks() {
+    public void shouldCheckInItemWhenCheckInListOptionIsChosen() {
         //Given
         Library library = new Library(stream);
-        checkOutBook(setUpTestBookList(bookList), "Moby Dick");
+        bookList = checkOutBook(setUpTestBookList(bookList), "Moby Dick");
         //When
-        library.displayBookList(bookList);
-        //Then
-        assertEquals("List of Books\n" +
-                "#To check-out a book use checkout:<booktitle>. To return a book use return:<booktitle>.\n" +
-                "#To return to menu use menu\n" +
-                "Robinson Crusoe | Daniel Defoe | 1871\n" +
-                "Pride and Prejudice | Jane Austen | 1813\n", outputStream.toString());
-    }
-
-    @Test
-    public void shouldNotDisplayCheckedOutMoviesInListOfMovies() {
-        //Given
-        Library library = new Library(stream);
-        checkOutMovie(setUpTestMovieList(movieList), "Pulp Fiction");
-        //When
-        library.displayMovieList(movieList);
-        //Then
-        assertEquals("List of Movies\n" +
-                "#To check-out a movie use checkout:<movietitle>\n" +
-                "#To return to menu use menu\n" +
-                "Kill Bill | 2001 | Quentin Tarantino | 9\n" +
-                "Inglorious Basterds | 2010 | Quentin Tarantino | 10\n", outputStream.toString());
-
-    }
-
-    @Test
-    public void shouldNotifyUserWhenBookIsSuccessfullyCheckedOut() {
-        //Given
-        Library library = new Library(stream);
-        //When
-        library.checkOutBook(setUpTestBookList(bookList), "Moby Dick");
-        //Then
-        assertEquals("Thank you! Enjoy the book\n", outputStream.toString());
-    }
-
-    @Test
-    public void shouldNotifyUserWhenMovieIsSuccessfullyCheckedOut() {
-        //Given
-        Library library = new Library(stream);
-        //When
-        library.checkOutMovie(setUpTestMovieList(movieList), "Pulp Fiction");
-       //Then
-       assertEquals("Thank you! Enjoy the movie\n", outputStream.toString());
-    }
-
-    @Test
-    public void shouldNotifyUserWhenSelectedBookIsNotAvailable() {
-        //Given
-        Library library = new Library(stream);
-        //When
-        library.checkOutBook(setUpTestBookList(bookList), "Test");
-        //Then
-        assertEquals("Sorry that book is not available\n", outputStream.toString());
-    }
-
-    @Test
-    public void shouldNotifyUserWhenSelectedMovieIsNotAvailable() {
-        //Given
-        Library library = new Library(stream);
-        //When
-        library.checkOutMovie(setUpTestMovieList(movieList), "Test");
-        //Then
-        assertEquals("Sorry that movie is not available\n", outputStream.toString());
-    }
-
-    @Test
-    public void shouldNotifyUserWhenSelectedBookIsAlreadyCheckedOut() {
-        //Given
-        Library library = new Library(stream);
-        checkOutBook(setUpTestBookList(bookList), "Moby Dick");
-        //When
-        library.checkOutBook(bookList, "Moby Dick");
-        //Then
-        assertEquals("Sorry that book is not available\n", outputStream.toString());
-    }
-
-    @Test
-    public void shouldNotifyUserWhenSelectedMovieIsAlreadyCheckedOut() {
-        //Given
-        Library library = new Library(stream);
-        checkOutMovie(setUpTestMovieList(movieList), "Pulp Fiction");
-        //When
-        library.checkOutMovie(movieList, "Pulp Fiction");
-        //Then
-        assertEquals("Sorry that movie is not available\n", outputStream.toString());
-    }
-
-    @Test
-    public void shouldReturnBookWhenTitleIsEntered() {
-        //Given
-        Library library = new Library(stream);
-        checkOutBook(setUpTestBookList(bookList), "Moby Dick");
-        //When
-        library.returnBook(bookList,"Moby Dick");
+        library.processListInput(bookList, "return:Moby Dick");
         //Then
         assertFalse(bookList.get(0).getCheckedOut());
     }
 
     @Test
-    public void shouldNotifyUserWhenBookIsSuccessfullyReturned() {
+    public void shouldExitApplicationWhenQuitListOptionIsChosen() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        library.processListInput(setUpTestBookList(bookList), "quit");
+        //Then
+
+    }
+
+    /*
+    @Test
+    public void shouldDisplayMenuWhenMenuListOptionIsChosen() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        library.processListInput(setUpTestMovieList(movieList), "menu");
+        //Then
+        assertEquals("#To choose a menu option use the respective number of the menu option\n" +
+                "1 List of Books\n" +
+                "2 List of Movies\n", outputStream.toString());
+    }*/
+
+    @Test
+    public void shouldNotifyUserWhenInvalidListOptionIsChosen() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        library.processListInput(setUpTestMovieList(movieList), "invalid");
+        //Then
+        assertEquals("Please select a valid option\n", outputStream.toString());
+    }
+    //---- test processListInput ----
+
+    //---- test convertInputToTitle ----
+    @Test
+    public void shouldConvertInputToTitle() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        String expected = library.convertInputToTitle("checkout:Moby Dick");
+        //Then
+        assertEquals("Moby Dick", expected);
+    }
+    //---- test convertInputToTitle ----
+
+    //---- test checkOutLibraryItem ----
+    @Test
+    public void shouldNotifyUserWhenCheckedOutLibraryItemIsNotAvailable() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        library.checkOutLibraryItem(setUpTestBookList(bookList), "Winnie Pooh");
+        //Then
+        assertEquals("Sorry that item is not available\n", outputStream.toString());
+    }
+
+    @Test
+    public void shouldNotifyUserWhenCheckedOutLibraryItemIsAlreadyCheckedOut() {
         //Given
         Library library = new Library(stream);
         checkOutBook(setUpTestBookList(bookList), "Moby Dick");
         //When
-        library.returnBook(bookList, "Moby Dick");
+        library.checkOutLibraryItem(bookList, "Moby Dick");
         //Then
-        assertEquals("Thank you for returning the book\n", outputStream.toString());
+        assertEquals("Sorry that item is not available\n", outputStream.toString());
+    }
+    
+    //---- test checkOutLibraryItem ----
+    @Test
+    public void shouldCheckOutItemOnlyWhenCredentialsAreValid() {
+        //Given
+        Library library = new Library(stream);
+        setUpTestMovieList(movieList);
+        //When
+        library.checkCredentials(movieList.get(0), "111-222", "123");
+        //Then
+        assertTrue(movieList.get(0).getCheckedOut());
     }
 
     @Test
-    public void shouldNotifyUserWhenReturnedBookIsNotValid() {
+    public void shouldNotifyUserWhenCredentialsAreInvalid() {
         //Given
         Library library = new Library(stream);
+        setUpTestMovieList(movieList);
         //When
-        library.returnBook(setUpTestBookList(bookList), "Invalid");
+        library.checkCredentials(movieList.get(0), "111-222", "124");
         //Then
-        assertEquals("That is not a valid book to return\n", outputStream.toString());
+        assertEquals("Sorry library number or password is not correct\n", outputStream.toString());
+    }
+    //---- test checkOutLibraryItem ----
+
+    //---- test checkInLibraryItem ----
+
+    @Test
+    public void shouldCheckInLibraryItem() {
+        //Given
+        Library library = new Library(stream);
+        bookList = checkOutBook(setUpTestBookList(bookList), "Moby Dick");
+        //When
+        library.checkInLibraryItem(bookList, "Moby Dick");
+        //Then
+        assertFalse(bookList.get(0).getCheckedOut());
     }
 
     @Test
-    public void shouldNotifyUserWhenReturnedBookIsNotCheckedOut() {
+    public void shouldNotifyUserWhenCheckedInItemIsNotValid() {
+        //Given
+        Library library = new Library(stream);
+        bookList = checkOutBook(setUpTestBookList(bookList), "Moby Dick");
+        //When
+        library.checkInLibraryItem(bookList, "Winnie Pooh");
+        //Then
+        assertEquals("That is not a valid item to return\n", outputStream.toString());
+    }
+
+    @Test
+    public void shouldNotifyUserWhenCheckedInItemIsAlreadyCheckedIn() {
         //Given
         Library library = new Library(stream);
         //When
-        library.returnBook(setUpTestBookList(bookList), "Moby Dick");
+        library.checkInLibraryItem(setUpTestBookList(bookList), "Moby Dick");
         //Then
-        assertEquals("That book is already checked-in\n", outputStream.toString());
+        assertEquals("That item is already checked-in\n", outputStream.toString());
     }
 
-    private ArrayList<Book> setUpTestBookList(ArrayList<Book> bookList) {
+    private ArrayList<LibraryItem> setUpTestBookList(ArrayList<LibraryItem> bookList) {
         Book book1 = new Book("Moby Dick", "Herman Melville", 1851);
         Book book2 = new Book("Robinson Crusoe", "Daniel Defoe", 1871);
         Book book3 = new Book("Pride and Prejudice", "Jane Austen", 1813);
@@ -250,17 +267,7 @@ public class LibraryTest {
         return bookList;
     }
 
-    private ArrayList<Book> checkOutBook(ArrayList<Book> bookList, String title) {
-        Library library = new Library(stream);
-        for(int i = 0; i < bookList.size(); i++) {
-            if(bookList.get(i).getTitle().equals(title)){
-                bookList.get(i).checkOut();
-            }
-        }
-        return bookList;
-    }
-
-    private ArrayList<Movie> setUpTestMovieList(ArrayList<Movie> movieList) {
+    private ArrayList<LibraryItem> setUpTestMovieList(ArrayList<LibraryItem> movieList) {
         Movie movie1 = new Movie("Pulp Fiction", 1993, "Quentin Tarantino", "8");
         Movie movie2 = new Movie("Kill Bill", 2001, "Quentin Tarantino", "9");
         Movie movie3 = new Movie("Inglorious Basterds", 2010, "Quentin Tarantino", "10");
@@ -270,13 +277,13 @@ public class LibraryTest {
         return movieList;
     }
 
-    private ArrayList<Movie> checkOutMovie(ArrayList<Movie> movieList, String title) {
+    private ArrayList<LibraryItem> checkOutBook(ArrayList<LibraryItem> bookList, String title) {
         Library library = new Library(stream);
-        for(int i = 0; i < movieList.size(); i++) {
-            if(movieList.get(i).getTitle().equals(title)) {
-                movieList.get(i).checkOut();
+        for(int i = 0; i < bookList.size(); i++) {
+            if(bookList.get(i).getTitle().equals(title)) {
+                bookList.get(i).checkOut("111-222");
             }
         }
-        return movieList;
+        return bookList;
     }
 }

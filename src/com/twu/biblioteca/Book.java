@@ -1,10 +1,11 @@
 package com.twu.biblioteca;
 
-public class Book {
+public class Book implements LibraryItem {
     private String title;
     private String author;
     private int year;
     private boolean checkedOut;
+    private String borrower;
 
     public Book(String title, String author, int year) throws IllegalArgumentException{
         if(title.isEmpty()) {
@@ -20,6 +21,17 @@ public class Book {
         this.author = author;
         this.year = year;
         this.checkedOut = false;
+        this.borrower = "";
+    }
+
+    public void checkOut(String borrower) {
+        checkedOut = true;
+        this.borrower = borrower;
+    }
+
+    public void checkIn() {
+        checkedOut = false;
+        borrower = "";
     }
 
     public String getTitle() {
@@ -38,12 +50,8 @@ public class Book {
         return checkedOut;
     }
 
-    public void checkOut() {
-        this.checkedOut = true;
-    }
-
-    public void checkIn() {
-        this.checkedOut = false;
+    public String getBorrower() {
+        return borrower;
     }
 
 

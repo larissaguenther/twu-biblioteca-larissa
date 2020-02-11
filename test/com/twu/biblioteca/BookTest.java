@@ -28,7 +28,7 @@ public class BookTest {
         //Given
         Book book = new Book("Robinson Crusoe", "Daniel Defoe", 1871);
         //When
-        book.checkOut();
+        book.checkOut("111-222");
         //Then
         assertTrue(book.getCheckedOut());
     }
@@ -37,7 +37,7 @@ public class BookTest {
     public void shouldReturnBook() {
         //Given
         Book book = new Book("Robinson Crusoe", "Daniel Defoe", 1871);
-        book.checkOut();
+        book.checkOut("111-222");
         //When
         book.checkIn();
         //Then

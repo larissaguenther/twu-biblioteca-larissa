@@ -6,21 +6,17 @@ import java.util.Scanner;
 
 public class Library {
     private PrintStream outputStream;
-    private ArrayList<Book> bookList;
-    private ArrayList<Movie> movieList;
+    private ArrayList<LibraryItem> bookList;
+    private ArrayList<LibraryItem> movieList;
     private CommandLineInterface commandLineInterface;
 
     public Library(PrintStream outputStream) {
         this.outputStream = outputStream;
-        this.bookList = new ArrayList<Book>();
-        this.movieList = new ArrayList<Movie>();
+        this.bookList = new ArrayList<LibraryItem>();
+        this.movieList = new ArrayList<LibraryItem>();
         setUpBookList(bookList);
         setUpMovieList(movieList);
         this.commandLineInterface = new CommandLineInterface(outputStream);
-    }
-
-    public ArrayList<Book> getBookList() {
-        return bookList;
     }
 
     public void chooseMenuOption(String input) {
@@ -36,16 +32,16 @@ public class Library {
     }
 
     private void chooseBookListOption() {
-        displayBookList(bookList);
+        displayList(bookList);
         while (true) {
-            processBookListInput(bookList, commandLineInterface.getInput());
+            processListInput(bookList, commandLineInterface.getInput());
         }
     }
 
     private void chooseMovieListOption() {
-        displayMovieList(movieList);
+        displayList(movieList);
         while(true) {
-            processMovieListInput(movieList, commandLineInterface.getInput());
+            processListInput(movieList, commandLineInterface.getInput());
         }
     }
 
@@ -57,47 +53,26 @@ public class Library {
         commandLineInterface.printOutput("Please select a valid option");
     }
 
-    public void displayBookList(ArrayList<Book> bookList) {
-        commandLineInterface.printOutput("List of Books");
-        commandLineInterface.printOutput("#To check-out a book use checkout:<booktitle>. To return a book use return:<booktitle>.");
-        commandLineInterface.printOutput("#To return to menu use menu");
-        for(int i = 0; i < bookList.size(); i++) {
-            displayOnlyNonCheckedOutBooks(bookList.get(i));
+    public void displayList(ArrayList<LibraryItem> libraryItemList) {
+        commandLineInterface.printOutput("#To check-out an item use 'checkout:<title>'. To return an item use 'return:<title>'");
+        for(int i = 0; i < libraryItemList.size(); i++) {
+            displayOnlyNonCheckedOutItems(libraryItemList.get(i));
         }
     }
 
-    public void displayMovieList(ArrayList<Movie> movieList) {
-        commandLineInterface.printOutput("List of Movies");
-        commandLineInterface.printOutput("#To check-out a movie use checkout:<movietitle>");
-        commandLineInterface.printOutput("#To return to menu use menu");
-        for(int i = 0; i < movieList.size(); i++) {
-            displayOnlyNonCheckedOutMovies(movieList.get(i));
+    private void displayOnlyNonCheckedOutItems(LibraryItem libraryItem) {
+        if (libraryItem.getCheckedOut() == false) {
+            commandLineInterface.printOutput(libraryItem.getTitle());
         }
     }
 
-    private void displayOnlyNonCheckedOutBooks(Book book) {
-        if (book.getCheckedOut() == false) {
-            commandLineInterface.printOutput(book.getTitle() +
-                    " | " + book.getAuthor() +
-                    " | " + book.getYear());
-        }
-    }
-
-    private void displayOnlyNonCheckedOutMovies(Movie movie) {
-        if (movie.getCheckedOut() == false) {
-            commandLineInterface.printOutput(movie.getTitle() +
-                    " | " + movie.getYear() +
-                    " | " + movie.getDirector() +
-                    " | " + movie.getRating());
-        }
-    }
-
-    public void processBookListInput(ArrayList<Book> bookList, String input) {
+    public void processListInput(ArrayList<LibraryItem> libraryItemList, String input) {
         if(input.startsWith("checkout")) {
-            checkOutBook(bookList, convertInput(input));
+            checkOutLibraryItem(libraryItemList, convertInputToTitle(input));
         } else if(input.startsWith("return")) {
-            returnBook(bookList, convertInput(input));
-        } else if (input.equals("quit")){
+            checkInLibraryItem(libraryItemList, convertInputToTitle(input));
+        }
+        else if (input.equals("quit")){
             System.exit(0);
         } else if(input.equals("menu")) {
             commandLineInterface.displayMenu();
@@ -108,92 +83,78 @@ public class Library {
         }
     }
 
-    public void processMovieListInput(ArrayList<Movie> movieList, String input) {
-        if(input.startsWith("checkout")) {
-            checkOutMovie(movieList, convertInput(input));
-        } else if(input.equals("quit")) {
-            System.exit(0);
-        } else if(input.equals("menu")) {
-            commandLineInterface.displayMenu();
-            chooseMenuOption(commandLineInterface.getInput());
-        } else {
-            commandLineInterface.printOutput("Please select a valid option");
-        }
-    }
-
-    public String convertInput(String input) {
+    public String convertInputToTitle(String input) {
         String[] inputArray = input.split(":");
         String title = inputArray[1];
         return title;
     }
 
-    public void checkOutBook(ArrayList<Book> bookList, String title) {
-        boolean foundBook = false;
-        for(int i = 0; i < bookList.size(); i++) {
-            if (bookList.get(i).getTitle().equals(title)) {
-                checkOutBookHelper(bookList.get(i));
-                foundBook = true;
+    public void checkOutLibraryItem(ArrayList<LibraryItem> libraryItemList, String title) {
+        boolean foundItem = false;
+        for (int i = 0; i < libraryItemList.size(); i++) {
+            if(libraryItemList.get(i).getTitle().equals(title)) {
+                checkOutLibraryItemHelper(libraryItemList.get(i));
+                foundItem = true;
             }
         }
-        if(foundBook == false) {
-                commandLineInterface.printOutput("Sorry that book is not available");
+        if(foundItem == false) {
+            commandLineInterface.printOutput("Sorry that item is not available");
         }
     }
 
-    private void checkOutBookHelper(Book book) {
-        if (book.getCheckedOut() == false) {
-            book.checkOut();
-            commandLineInterface.printOutput("Thank you! Enjoy the book");
+    public void checkOutLibraryItemHelper(LibraryItem libraryItem) {
+        if(libraryItem.getCheckedOut() == false) {
+            checkCredentials(libraryItem, getLibraryNumber(), getPassword());
         } else {
-            commandLineInterface.printOutput("Sorry that book is not available");
+            commandLineInterface.printOutput("Sorry that item is not available");
         }
     }
 
-    public void checkOutMovie(ArrayList<Movie> movieList, String title) {
-        boolean foundMovie = false;
-        for(int i = 0; i < movieList.size(); i++) {
-            if(movieList.get(i).getTitle().equals(title)) {
-               checkOutMovieHelper(movieList.get(i));
-                foundMovie = true;
+    private String getLibraryNumber() {
+        commandLineInterface.printOutput("Please enter your Librarynumber");
+        String libraryNumber = commandLineInterface.getInput();
+        return libraryNumber;
+    }
+
+    private String getPassword() {
+        commandLineInterface.printOutput("Pleaser enter your Password");
+        String password = commandLineInterface.getInput();
+        return password;
+    }
+
+    public void checkCredentials(LibraryItem libraryItem, String libraryNumber, String password) {
+        if(libraryNumber.equals("111-222") && password.equals("123")) {
+            libraryItem.checkOut(libraryNumber);
+            commandLineInterface.printOutput("Thank you! Enjoy");
+        } else {
+            commandLineInterface.printOutput("Sorry library number or password is not correct");
+            //checkOutLibraryItemHelper(libraryItem);
+        }
+    }
+
+    public void checkInLibraryItem(ArrayList<LibraryItem> libraryItemList, String title) {
+        boolean foundItem = false;
+        for (int i = 0; i < libraryItemList.size(); i++) {
+            if(libraryItemList.get(i).getTitle().equals(title)) {
+                checkInLibraryItemHelper(libraryItemList.get(i));
+                foundItem = true;
             }
         }
-        if(foundMovie == false) {
-            commandLineInterface.printOutput("Sorry that movie is not available");
+        if (foundItem == false) {
+            commandLineInterface.printOutput("That is not a valid item to return");
         }
     }
 
-    private void checkOutMovieHelper(Movie movie) {
-        if(movie.getCheckedOut() == false) {
-            movie.checkOut();
-            commandLineInterface.printOutput("Thank you! Enjoy the movie");
+    private void checkInLibraryItemHelper(LibraryItem libraryItem) {
+        if(libraryItem.getCheckedOut() == true) {
+            libraryItem.checkIn();
+            commandLineInterface.printOutput("Thank you for returning the item");
         } else {
-            commandLineInterface.printOutput("Sorry that movie is not available");
+            commandLineInterface.printOutput("That item is already checked-in");
         }
     }
 
-    public void returnBook(ArrayList<Book> bookList, String title) {
-        boolean foundBook = false;
-        for(int i = 0; i < bookList.size(); i++) {
-            if(bookList.get(i).getTitle().equals(title)) {
-                returnBookHelper(bookList.get(i));
-                foundBook = true;
-            }
-        }
-        if(foundBook == false) {
-            outputStream.println("That is not a valid book to return");
-        }
-    }
-
-    private void returnBookHelper(Book book) {
-        if(book.getCheckedOut() == true) {
-            book.checkIn();
-            commandLineInterface.printOutput("Thank you for returning the book");
-        } else {
-            outputStream.println("That book is already checked-in");
-        }
-    }
-
-    private ArrayList<Book> setUpBookList(ArrayList<Book> bookList) {
+    private ArrayList<LibraryItem> setUpBookList(ArrayList<LibraryItem> bookList) {
         Book book1 = new Book("Moby Dick", "Herman Melville", 1851);
         Book book2 = new Book("Robinson Crusoe", "Daniel Defoe", 1871);
         Book book3 = new Book("Pride and Prejudice", "Jane Austen", 1813);
@@ -204,7 +165,7 @@ public class Library {
         return bookList;
     }
 
-    private ArrayList<Movie> setUpMovieList(ArrayList<Movie> movieList) {
+    private ArrayList<LibraryItem> setUpMovieList(ArrayList<LibraryItem> movieList) {
         Movie movie1 = new Movie("Pulp Fiction", 1993, "Quentin Tarantino", "8");
         Movie movie2 = new Movie("Kill Bill", 2001, "Quentin Tarantino", "9");
         Movie movie3 = new Movie("Inglorious Basterds", 2010, "Quentin Tarantino", "10");
