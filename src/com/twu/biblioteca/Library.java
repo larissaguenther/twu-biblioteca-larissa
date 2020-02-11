@@ -136,7 +136,7 @@ public class Library {
             }
         }
         if(foundBook == false) {
-                outputStream.println("Sorry that book is not available");
+                commandLineInterface.printOutput("Sorry that book is not available");
         }
     }
 
@@ -153,10 +153,21 @@ public class Library {
         boolean foundMovie = false;
         for(int i = 0; i < movieList.size(); i++) {
             if(movieList.get(i).getTitle().equals(title)) {
-                movieList.get(i).checkOut();
-                commandLineInterface.printOutput("Thank you! Enjoy the movie");
+               checkOutMovieHelper(movieList.get(i));
                 foundMovie = true;
             }
+        }
+        if(foundMovie == false) {
+            commandLineInterface.printOutput("Sorry that movie is not available");
+        }
+    }
+
+    private void checkOutMovieHelper(Movie movie) {
+        if(movie.getCheckedOut() == false) {
+            movie.checkOut();
+            commandLineInterface.printOutput("Thank you! Enjoy the movie");
+        } else {
+            commandLineInterface.printOutput("Sorry that movie is not available");
         }
     }
 

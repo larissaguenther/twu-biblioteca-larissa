@@ -147,6 +147,16 @@ public class LibraryTest {
     }
 
     @Test
+    public void shouldNotifyUserWhenMovieIsSuccessfullyCheckedOut() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        library.checkOutMovie(setUpTestMovieList(movieList), "Pulp Fiction");
+       //Then
+       assertEquals("Thank you! Enjoy the movie\n", outputStream.toString());
+    }
+
+    @Test
     public void shouldNotifyUserWhenSelectedBookIsNotAvailable() {
         //Given
         Library library = new Library(stream);
@@ -155,6 +165,17 @@ public class LibraryTest {
         //Then
         assertEquals("Sorry that book is not available\n", outputStream.toString());
     }
+
+    @Test
+    public void shouldNotifyUserWhenSelectedMovieIsNotAvailable() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        library.checkOutMovie(setUpTestMovieList(movieList), "Test");
+        //Then
+        assertEquals("Sorry that movie is not available\n", outputStream.toString());
+    }
+
     @Test
     public void shouldNotifyUserWhenSelectedBookIsAlreadyCheckedOut() {
         //Given
@@ -164,6 +185,17 @@ public class LibraryTest {
         library.checkOutBook(bookList, "Moby Dick");
         //Then
         assertEquals("Sorry that book is not available\n", outputStream.toString());
+    }
+
+    @Test
+    public void shouldNotifyUserWhenSelectedMovieIsAlreadyCheckedOut() {
+        //Given
+        Library library = new Library(stream);
+        checkOutMovie(setUpTestMovieList(movieList), "Pulp Fiction");
+        //When
+        library.checkOutMovie(movieList, "Pulp Fiction");
+        //Then
+        assertEquals("Sorry that movie is not available\n", outputStream.toString());
     }
 
     @Test
