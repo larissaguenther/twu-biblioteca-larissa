@@ -43,7 +43,7 @@ public class Movie implements LibraryItem {
         return title;
     }
 
-    public String getDirector() {
+    public String getEditor() {
         return director;
     }
 

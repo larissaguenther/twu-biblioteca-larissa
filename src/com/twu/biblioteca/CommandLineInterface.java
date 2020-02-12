@@ -16,8 +16,8 @@ public class CommandLineInterface {
 
     public void displayMenu() {
         outputStream.println("#To choose a menu option use the respective number of the menu option");
-        outputStream.println("1 List of Books");
-        outputStream.println("2 List of Movies");
+        outputStream.println("[1] List of Books");
+        outputStream.println("[2] List of Movies");
     }
 
     public String getInput() {

@@ -75,9 +75,9 @@ public class LibraryTest {
         library.displayList(setUpTestBookList(bookList));
         //Then
         assertEquals("#To check-out an item use 'checkout:<title>'. To return an item use 'return:<title>'\n" +
-                "Moby Dick\n" +
-                "Robinson Crusoe\n" +
-                "Pride and Prejudice\n", outputStream.toString());
+                "Moby Dick | Herman Melville | 1851 | 7\n" +
+                "Robinson Crusoe | Daniel Defoe | 1871 | 10\n" +
+                "Pride and Prejudice | Jane Austen | 1813 | unrated\n", outputStream.toString());
     }
 
     @Test
@@ -88,9 +88,9 @@ public class LibraryTest {
         library.displayList(setUpTestMovieList(movieList));
         //Then
         assertEquals("#To check-out an item use 'checkout:<title>'. To return an item use 'return:<title>'\n" +
-                "Pulp Fiction\n" +
-                "Kill Bill\n" +
-                "Inglorious Basterds\n", outputStream.toString());
+                "Pulp Fiction | Quentin Tarantino | 1993 | 8\n" +
+                "Kill Bill | Quentin Tarantino | 2001 | 9\n" +
+                "Inglorious Basterds | Quentin Tarantino | 2010 | 10\n", outputStream.toString());
     }
 
     @Test
@@ -102,8 +102,8 @@ public class LibraryTest {
         library.displayList(bookList);
         //Then
         assertEquals("#To check-out an item use 'checkout:<title>'. To return an item use 'return:<title>'\n" +
-                "Robinson Crusoe\n" +
-                "Pride and Prejudice\n", outputStream.toString());
+                "Robinson Crusoe | Daniel Defoe | 1871 | 10\n" +
+                "Pride and Prejudice | Jane Austen | 1813 | unrated\n", outputStream.toString());
     }
     //---- test displayList ----
 
@@ -258,9 +258,9 @@ public class LibraryTest {
     }
 
     private ArrayList<LibraryItem> setUpTestBookList(ArrayList<LibraryItem> bookList) {
-        Book book1 = new Book("Moby Dick", "Herman Melville", 1851);
-        Book book2 = new Book("Robinson Crusoe", "Daniel Defoe", 1871);
-        Book book3 = new Book("Pride and Prejudice", "Jane Austen", 1813);
+        Book book1 = new Book("Moby Dick", "Herman Melville", 1851, "7");
+        Book book2 = new Book("Robinson Crusoe", "Daniel Defoe", 1871, "10");
+        Book book3 = new Book("Pride and Prejudice", "Jane Austen", 1813, "unrated");
         bookList.add(book1);
         bookList.add(book2);
         bookList.add(book3);

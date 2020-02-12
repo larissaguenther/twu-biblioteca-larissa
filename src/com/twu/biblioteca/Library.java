@@ -62,7 +62,10 @@ public class Library {
 
     private void displayOnlyNonCheckedOutItems(LibraryItem libraryItem) {
         if (libraryItem.getCheckedOut() == false) {
-            commandLineInterface.printOutput(libraryItem.getTitle());
+            commandLineInterface.printOutput(libraryItem.getTitle() +
+                    " | " + libraryItem.getEditor() +
+                    " | " + libraryItem.getYear() +
+                    " | " + libraryItem.getRating());
         }
     }
 
@@ -155,9 +158,9 @@ public class Library {
     }
 
     private ArrayList<LibraryItem> setUpBookList(ArrayList<LibraryItem> bookList) {
-        Book book1 = new Book("Moby Dick", "Herman Melville", 1851);
-        Book book2 = new Book("Robinson Crusoe", "Daniel Defoe", 1871);
-        Book book3 = new Book("Pride and Prejudice", "Jane Austen", 1813);
+        Book book1 = new Book("Moby Dick", "Herman Melville", 1851, "7");
+        Book book2 = new Book("Robinson Crusoe", "Daniel Defoe", 1871, "10");
+        Book book3 = new Book("Pride and Prejudice", "Jane Austen", 1813, "unrated");
         bookList.add(book1);
         bookList.add(book2);
         bookList.add(book3);
