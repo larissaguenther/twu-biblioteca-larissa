@@ -24,6 +24,8 @@ public class Library {
             chooseBookListOption();
         } else if (input.equals("2")) {
             chooseMovieListOption();
+        } else if(input.equals("3")) {
+            chooseLibrarianLoginOption();
         } else if (input.equals("quit")) {
             chooseQuitOption();
         } else {
@@ -43,6 +45,17 @@ public class Library {
         while(true) {
             processListInput(movieList, commandLineInterface.getInput());
         }
+    }
+
+    private void chooseLibrarianLoginOption() {
+        commandLineInterface.printOutput("#List of Books");
+        displayListForLibrarians(bookList);
+        commandLineInterface.printOutput("#List of Movies");
+        displayListForLibrarians(movieList);
+        while(true) {
+            processLibrarianLoginInput(commandLineInterface.getInput());
+        }
+
     }
 
     private void chooseQuitOption() {
@@ -69,6 +82,27 @@ public class Library {
         }
     }
 
+    public void displayListForLibrarians(ArrayList<LibraryItem> libraryItemList) {
+        for(int i = 0; i < libraryItemList.size(); i++) {
+            displayAllItems(libraryItemList.get(i));
+        }
+    }
+
+    private void displayAllItems(LibraryItem libraryItem) {
+        if(libraryItem.getCheckedOut() == false) {
+            commandLineInterface.printOutput("Checked-in: " + libraryItem.getTitle() +
+                    " | " + libraryItem.getEditor() +
+                    " | " + libraryItem.getYear() +
+                    " | " + libraryItem.getRating());;
+        } else {
+            commandLineInterface.printOutput("Checked-out [" + libraryItem.getBorrower() + "]: " +
+                    libraryItem.getTitle() +
+                    " | " + libraryItem.getEditor() +
+                    " | " + libraryItem.getYear() +
+                    " | " + libraryItem.getRating());;
+        }
+    }
+
     public void processListInput(ArrayList<LibraryItem> libraryItemList, String input) {
         if(input.startsWith("checkout")) {
             checkOutLibraryItem(libraryItemList, convertInputToTitle(input));
@@ -90,6 +124,18 @@ public class Library {
         String[] inputArray = input.split(":");
         String title = inputArray[1];
         return title;
+    }
+
+    public void processLibrarianLoginInput(String input) {
+        if (input.equals("quit")){
+            System.exit(0);
+        } else if(input.equals("menu")) {
+            commandLineInterface.displayMenu();
+            chooseMenuOption(commandLineInterface.getInput());
+        }
+        else {
+            commandLineInterface.printOutput("Please select a valid option");
+        }
     }
 
     public void checkOutLibraryItem(ArrayList<LibraryItem> libraryItemList, String title) {

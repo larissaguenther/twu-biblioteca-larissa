@@ -105,6 +105,34 @@ public class LibraryTest {
                 "Robinson Crusoe | Daniel Defoe | 1871 | 10\n" +
                 "Pride and Prejudice | Jane Austen | 1813 | unrated\n", outputStream.toString());
     }
+
+    @Test
+    public void shouldDisplayListOfBooksForLibrarians() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        library.displayListForLibrarians(setUpTestBookList(bookList));
+        //Then
+        assertEquals("Checked-in: Moby Dick | Herman Melville | 1851 | 7\n" +
+                "Checked-in: Robinson Crusoe | Daniel Defoe | 1871 | 10\n" +
+                "Checked-in: Pride and Prejudice | Jane Austen | 1813 | unrated\n", outputStream.toString());
+    }
+
+    @Test
+    public void shouldDisplayWhoHasCheckedOutABookForLibrarians() {
+        //Given
+        Library library = new Library(stream);
+        bookList = checkOutBook(setUpTestBookList(bookList), "Moby Dick");
+        //When
+        library.displayListForLibrarians(bookList);
+        //Then
+        //Then
+        assertEquals("Checked-out [111-222]: Moby Dick | Herman Melville | 1851 | 7\n" +
+                "Checked-in: Robinson Crusoe | Daniel Defoe | 1871 | 10\n" +
+                "Checked-in: Pride and Prejudice | Jane Austen | 1813 | unrated\n", outputStream.toString());
+
+    }
+
     //---- test displayList ----
 
     //---- test processListInput ----
@@ -164,6 +192,42 @@ public class LibraryTest {
         assertEquals("Please select a valid option\n", outputStream.toString());
     }
     //---- test processListInput ----
+
+    //---- test processLibrarianLoginInput ----
+
+    /*
+    @Test
+    public void shouldDisplayMenuWhenMenuLibrarianLoginOptionIsChosen() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        library.processLibrarianLoginInput("menu");
+        //Then
+        assertEquals("#To choose a menu option use the respective number of the menu option\n" +
+                "[1] List of Books\n" +
+                "[2] List of Movies\n" +
+                "[3] Librarian Login\n", outputStream.toString());
+    }*/
+
+    @Test
+    public void shouldExitApplicationWhenQuitLibrarianLoginOptionIsChosen() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        library.processLibrarianLoginInput("quit");
+        //Then
+
+    }
+
+    @Test
+    public void shouldNotifyLibrarianWhenInvalidLibrarianLoginOptionIsChosen() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        library.processLibrarianLoginInput("invalid");
+        //Then
+        assertEquals("Please select a valid option\n", outputStream.toString());
+    }
 
     //---- test convertInputToTitle ----
     @Test

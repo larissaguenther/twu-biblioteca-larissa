@@ -8,4 +8,5 @@ public interface LibraryItem {
     boolean getCheckedOut();
     void checkOut(String borrower);
     void checkIn();
+    String getBorrower();
 }
