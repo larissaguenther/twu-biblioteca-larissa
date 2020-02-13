@@ -1,0 +1,2 @@
+SELECT movie.title FROM movie LEFT JOIN checkout_item ON checkout_item.movie_id = movie.id WHERE checkout_item.movie_id IS NULL;
+SELECT book.title FROM book LEFT JOIN checkout_item ON checkout_item.book_id = book.id WHERE checkout_item.book_id IS NULL;
