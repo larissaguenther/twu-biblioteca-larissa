@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import java.util.Objects;
+
 public class Book implements LibraryItem {
     private String title;
     private String author;
@@ -63,5 +65,21 @@ public class Book implements LibraryItem {
         return borrower;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book)) return false;
+        Book book = (Book) o;
+        return year == book.year &&
+                checkedOut == book.checkedOut &&
+                Objects.equals(title, book.title) &&
+                Objects.equals(author, book.author) &&
+                Objects.equals(rating, book.rating) &&
+                Objects.equals(borrower, book.borrower);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, author, year, rating, checkedOut, borrower);
+    }
 }

@@ -2,20 +2,27 @@ package com.twu.biblioteca;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Library {
     private PrintStream outputStream;
     private ArrayList<LibraryItem> bookList;
     private ArrayList<LibraryItem> movieList;
+    private HashMap<String, User> customers;
+    private HashMap<String, User> librarians;
     private CommandLineInterface commandLineInterface;
 
     public Library(PrintStream outputStream) {
         this.outputStream = outputStream;
-        this.bookList = new ArrayList<LibraryItem>();
-        this.movieList = new ArrayList<LibraryItem>();
+        this.bookList = new ArrayList<>();
+        this.movieList = new ArrayList<>();
+        this.customers = new HashMap<>();
+        this.librarians = new HashMap<>();
         setUpBookList(bookList);
         setUpMovieList(movieList);
+        setUpCustomers(customers);
+        setUpLibrarians(librarians);
         this.commandLineInterface = new CommandLineInterface(outputStream);
     }
 
@@ -25,6 +32,8 @@ public class Library {
         } else if (input.equals("2")) {
             chooseMovieListOption();
         } else if(input.equals("3")) {
+            chooseUserLoginOption();
+        } else if(input.equals("4")) {
             chooseLibrarianLoginOption();
         } else if (input.equals("quit")) {
             chooseQuitOption();
@@ -47,15 +56,31 @@ public class Library {
         }
     }
 
-    private void chooseLibrarianLoginOption() {
-        commandLineInterface.printOutput("#List of Books");
-        displayListForLibrarians(bookList);
-        commandLineInterface.printOutput("#List of Movies");
-        displayListForLibrarians(movieList);
-        while(true) {
-            processLibrarianLoginInput(commandLineInterface.getInput());
-        }
+    private void chooseUserLoginOption() {
+        String libraryNumber = getLibraryNumber();
+        String password = getPassword();
+        if (checkCredentials(customers, libraryNumber, password) == true) {
+            displayUserInformation(libraryNumber);
 
+        } else {
+            commandLineInterface.printOutput("Sorry wrong credentials");
+        }
+        while(true) {
+            processLoginInput(commandLineInterface.getInput());
+        }
+    }
+
+    private void chooseLibrarianLoginOption() {
+        String libraryNumber = getLibraryNumber();
+        String password = getPassword();
+        if (checkCredentials(librarians, libraryNumber, password) == true) {
+            displayInfoForLibrarians();
+        } else {
+            commandLineInterface.printOutput("Sorry, wrong credentials");
+        }
+        while(true) {
+            processLoginInput(commandLineInterface.getInput());
+        }
     }
 
     private void chooseQuitOption() {
@@ -64,6 +89,35 @@ public class Library {
 
     private void chooseInvalidOption() {
         commandLineInterface.printOutput("Please select a valid option");
+    }
+
+    public void processListInput(ArrayList<LibraryItem> libraryItemList, String input) {
+        if(input.startsWith("checkout")) {
+            checkOutLibraryItem(libraryItemList, convertInputToTitle(input));
+        } else if(input.startsWith("return")) {
+            checkInLibraryItem(libraryItemList, convertInputToTitle(input));
+        }
+        else if (input.equals("quit")){
+            System.exit(0);
+        } else if(input.equals("menu")) {
+            commandLineInterface.displayMenu();
+            chooseMenuOption(commandLineInterface.getInput());
+        }
+        else {
+            commandLineInterface.printOutput("Please select a valid option");
+        }
+    }
+
+    public void processLoginInput(String input) {
+        if (input.equals("quit")){
+            System.exit(0);
+        } else if(input.equals("menu")) {
+            commandLineInterface.displayMenu();
+            chooseMenuOption(commandLineInterface.getInput());
+        }
+        else {
+            commandLineInterface.printOutput("Please select a valid option");
+        }
     }
 
     public void displayList(ArrayList<LibraryItem> libraryItemList) {
@@ -103,21 +157,21 @@ public class Library {
         }
     }
 
-    public void processListInput(ArrayList<LibraryItem> libraryItemList, String input) {
-        if(input.startsWith("checkout")) {
-            checkOutLibraryItem(libraryItemList, convertInputToTitle(input));
-        } else if(input.startsWith("return")) {
-            checkInLibraryItem(libraryItemList, convertInputToTitle(input));
-        }
-        else if (input.equals("quit")){
-            System.exit(0);
-        } else if(input.equals("menu")) {
-            commandLineInterface.displayMenu();
-            chooseMenuOption(commandLineInterface.getInput());
-        }
-        else {
-            commandLineInterface.printOutput("Please select a valid option");
-        }
+
+    public void displayUserInformation(String libraryNumber) {
+        User user = customers.get(libraryNumber);
+        commandLineInterface.printOutput("User information for Library Number " +
+                libraryNumber);
+        commandLineInterface.printOutput("Name: " + user.getName());
+        commandLineInterface.printOutput("E-Mail: " + user.getEmail());
+        commandLineInterface.printOutput("Phone Number: " + user.getNumber());
+    }
+
+    private void displayInfoForLibrarians() {
+        commandLineInterface.printOutput("#List of Books");
+        displayListForLibrarians(bookList);
+        commandLineInterface.printOutput("#List of Movies");
+        displayListForLibrarians(movieList);
     }
 
     public String convertInputToTitle(String input) {
@@ -126,23 +180,15 @@ public class Library {
         return title;
     }
 
-    public void processLibrarianLoginInput(String input) {
-        if (input.equals("quit")){
-            System.exit(0);
-        } else if(input.equals("menu")) {
-            commandLineInterface.displayMenu();
-            chooseMenuOption(commandLineInterface.getInput());
-        }
-        else {
-            commandLineInterface.printOutput("Please select a valid option");
-        }
-    }
-
     public void checkOutLibraryItem(ArrayList<LibraryItem> libraryItemList, String title) {
         boolean foundItem = false;
         for (int i = 0; i < libraryItemList.size(); i++) {
             if(libraryItemList.get(i).getTitle().equals(title)) {
-                checkOutLibraryItemHelper(libraryItemList.get(i));
+                if(libraryItemList.get(i).getCheckedOut() == false) {
+                    checkOutLibraryItemCheckCredentials(libraryItemList.get(i));
+                } else {
+                    commandLineInterface.printOutput("Sorry that item is not available");
+                }
                 foundItem = true;
             }
         }
@@ -151,12 +197,26 @@ public class Library {
         }
     }
 
-    public void checkOutLibraryItemHelper(LibraryItem libraryItem) {
-        if(libraryItem.getCheckedOut() == false) {
-            checkCredentials(libraryItem, getLibraryNumber(), getPassword());
+    private void checkOutLibraryItemCheckCredentials(LibraryItem libraryItem) {
+        String libraryNumber = getLibraryNumber();
+        String password = getPassword();
+        if(checkCredentials(customers, libraryNumber, password) == true) {
+            libraryItem.checkOut(libraryNumber);
+            commandLineInterface.printOutput("Thank you! Enjoy");
         } else {
-            commandLineInterface.printOutput("Sorry that item is not available");
+            commandLineInterface.printOutput("Sorry wrong credentials");
         }
+    }
+
+    public boolean checkCredentials(HashMap<String, User> users, String libraryNumber, String password) {
+        boolean validCredentials = false;
+        if(users.containsKey(libraryNumber)) {
+            User user = users.get(libraryNumber);
+            if (user.getPassword().equals(password)) {
+                validCredentials = true;
+            }
+        }
+        return validCredentials;
     }
 
     private String getLibraryNumber() {
@@ -169,16 +229,6 @@ public class Library {
         commandLineInterface.printOutput("Pleaser enter your Password");
         String password = commandLineInterface.getInput();
         return password;
-    }
-
-    public void checkCredentials(LibraryItem libraryItem, String libraryNumber, String password) {
-        if(libraryNumber.equals("111-222") && password.equals("123")) {
-            libraryItem.checkOut(libraryNumber);
-            commandLineInterface.printOutput("Thank you! Enjoy");
-        } else {
-            commandLineInterface.printOutput("Sorry library number or password is not correct");
-            //checkOutLibraryItemHelper(libraryItem);
-        }
     }
 
     public void checkInLibraryItem(ArrayList<LibraryItem> libraryItemList, String title) {
@@ -223,5 +273,23 @@ public class Library {
         movieList.add(movie3);
 
         return movieList;
+    }
+
+    private HashMap<String,User> setUpCustomers (HashMap<String, User> customers) {
+        User customer1 = new User("123", "Mike Miller", "mike.miller@web.com", "017677334455");
+        User customer2 = new User("345", "Mary Moon", "mary.moon@web.com", "017677334466");
+        User customer3 = new User("567", "Sarah Smith", "sarah.smith@web.com", "017677334477");
+        customers.put("111-222", customer1);
+        customers.put("333-444", customer2);
+        customers.put("555-666", customer3);
+
+        return customers;
+    }
+
+    private HashMap<String,User> setUpLibrarians (HashMap<String, User> librarians) {
+        User librarian1 = new User("ilovebooks", "Leo Librarian", "leo.librarian@web.com", "015664488");
+        librarians.put("888-888", librarian1);
+
+        return librarians;
     }
 }

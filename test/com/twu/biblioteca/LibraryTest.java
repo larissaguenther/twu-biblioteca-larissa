@@ -2,9 +2,12 @@ package com.twu.biblioteca;
 
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.junit.Assert.*;
 
@@ -12,10 +15,13 @@ public class LibraryTest {
 
     private ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     private PrintStream stream = new PrintStream(outputStream);
-    private ArrayList<LibraryItem> bookList = new ArrayList<LibraryItem>();
-    private ArrayList<LibraryItem> movieList = new ArrayList<LibraryItem>();
+    private ArrayList<LibraryItem> bookList = new ArrayList<>();
+    private ArrayList<LibraryItem> movieList = new ArrayList<>();
+    private HashMap<String, User> customers = new HashMap<>();
 
     //---- test chooseMenuOption ----
+
+
     /*
     @Test
     public void shouldDisplayListOfBooksWhenMenuOption1IsChosen() {
@@ -30,6 +36,7 @@ public class LibraryTest {
                 "Pride and Prejudice\n" ,outputStream.toString());
     }*/
 
+
     /*
     @Test
     public void shouldDisplayListOfMoviesWhenMenuOption2IsChosen() {
@@ -42,6 +49,28 @@ public class LibraryTest {
                 "Pulp Fiction\n" +
                 "Kill Bill\n" +
                 "Inglorious Basterds\n" ,outputStream.toString());
+    }*/
+
+    /*
+    @Test
+    public void shouldAskForCredentialsWhenMenuOption3IsChosen() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        library.chooseMenuOption("3");
+        //Then
+        assertEquals("Please enter your Librarynumber", outputStream.toString());
+    }*/
+
+    /*
+    @Test
+    public void shouldAskForCredentialsWhenMenuOption4IsChosen() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        library.chooseMenuOption("4");
+        //Then
+        assertEquals("Please enter your Librarynumber", outputStream.toString());
     }*/
 
     /*
@@ -65,6 +94,38 @@ public class LibraryTest {
         assertEquals("Please select a valid option\n", outputStream.toString());
     }
     //---- test chooseMenuOption ----
+
+    //--- test checkCredentials
+    @Test
+    public void shouldReturnTrueIfValidCredentialsAreEntered() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        boolean validCredentials = library.checkCredentials(setUpTestCustomers(customers), "111-222", "123");
+        //Then
+        assertTrue(validCredentials);
+    }
+
+    @Test
+    public void shouldReturnFalseIfInvalidLibraryNumberIsEntered() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        boolean validCredentials = library.checkCredentials(setUpTestCustomers(customers), "111-22", "123");
+        //Then
+        assertFalse(validCredentials);
+    }
+
+    @Test
+    public void shouldReturnFalseIfInvalidPasswordIsEntered() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        boolean validCredentials = library.checkCredentials(setUpTestCustomers(customers), "111-222", "124");
+        //Then
+        assertFalse(validCredentials);
+    }
+    //--- test checkCredentials
 
     //---- test displayList ----
     @Test
@@ -133,9 +194,22 @@ public class LibraryTest {
 
     }
 
+    @Test
+    public void shouldDisplayUserInformation() {
+        //Given
+        Library library = new Library(stream);
+        //When
+        library.displayUserInformation("111-222");
+        //Then
+        assertEquals("User information for Library Number 111-222\n" +
+                "Name: Mike Miller\n" +
+                "E-Mail: mike.miller@web.com\n" +
+                "Phone Number: 017677334455\n", outputStream.toString());
+    }
     //---- test displayList ----
 
     //---- test processListInput ----
+
     /*
     @Test
     public void shouldCheckOutItemWhenCheckOutListOptionIsChosen() {
@@ -214,7 +288,7 @@ public class LibraryTest {
         //Given
         Library library = new Library(stream);
         //When
-        library.processLibrarianLoginInput("quit");
+        library.processLoginInput("quit");
         //Then
 
     }
@@ -224,7 +298,7 @@ public class LibraryTest {
         //Given
         Library library = new Library(stream);
         //When
-        library.processLibrarianLoginInput("invalid");
+        library.processLoginInput("invalid");
         //Then
         assertEquals("Please select a valid option\n", outputStream.toString());
     }
@@ -264,6 +338,7 @@ public class LibraryTest {
     }
     
     //---- test checkOutLibraryItem ----
+    /*
     @Test
     public void shouldCheckOutItemOnlyWhenCredentialsAreValid() {
         //Given
@@ -284,7 +359,7 @@ public class LibraryTest {
         library.checkCredentials(movieList.get(0), "111-222", "124");
         //Then
         assertEquals("Sorry library number or password is not correct\n", outputStream.toString());
-    }
+    }*/
     //---- test checkOutLibraryItem ----
 
     //---- test checkInLibraryItem ----
@@ -349,5 +424,16 @@ public class LibraryTest {
             }
         }
         return bookList;
+    }
+
+    private HashMap<String, User> setUpTestCustomers(HashMap<String, User> customers) {
+        User customer1 = new User("123", "Mike Miller", "mike.miller@web.com", "017677334455");
+        User customer2 = new User("345", "Mary Moon", "mary.moon@web.com", "017677334466");
+        User customer3 = new User("567", "Sarah Smith", "sarah.smith@web.com", "017677334477");
+        customers.put("111-222", customer1);
+        customers.put("333-444", customer2);
+        customers.put("555-666", customer3);
+
+        return customers;
     }
 }
